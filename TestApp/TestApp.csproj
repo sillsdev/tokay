@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileLocator.cs" />
     <Compile Include="ShowGoogleForm.cs">
       <SubType>Form</SubType>
     </Compile>

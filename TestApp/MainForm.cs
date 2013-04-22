@@ -12,7 +12,7 @@ namespace TestApp
 		{
 			InitializeComponent();
 
-			_ko = new KOControl(GetObject, "MainView.html");
+			_ko = new KOControl(GetObject, FileLocator.GetFileDistributedWithApplication("MainView.html"));
 			Controls.Add(_ko);
 			_ko.Dock = DockStyle.Fill;
 			_mainViewModel = new MainViewModel();

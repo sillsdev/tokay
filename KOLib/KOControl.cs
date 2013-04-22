@@ -30,10 +30,12 @@ namespace Knockout.Net
 		private bool _loaded;
 		private readonly HashSet<Type> _enumerations; 
 
-		public KOControl(Func<string, object> getObject, string startupView)
+		public KOControl(Func<string, object> getObject, string pathToStartupViewHtml)
 		{
+            if(!File.Exists(pathToStartupViewHtml))
+                throw new ApplicationException(pathToStartupViewHtml + " does not exist");
 			_getObject = getObject;
-			_currentView = startupView;
+			_currentView = pathToStartupViewHtml;
 			_collectionMonitor = new SimpleMonitor();
 			_propertyMonitor = new SimpleMonitor();
 			_lastCleanup = DateTime.Now;
@@ -99,8 +101,8 @@ namespace Knockout.Net
 		private void LoadCurrentView()
 		{
 			string path = _currentView;
-			if (!Path.IsPathRooted(path))
-				path = Path.Combine(Directory.GetCurrentDirectory(), path);
+//			if (!Path.IsPathRooted(path)) now requires the client to give us the actual path
+//				path = Path.Combine(Directory.GetCurrentDirectory(), path);
 			var uri = new Uri(path);
 			_browser.Navigate(uri.AbsoluteUri);
 		}
