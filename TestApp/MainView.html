@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<script type="text/javascript" src="../lib/jquery-1.9.1.js"></script>
+		<script type="text/javascript" src="../lib/knockout-2.2.1.debug.js"></script>
+		<script type="text/javascript" src="../js/knockout.net.js"></script>
+		<script type='text/javascript'>
+			$(function() {
+				ko.applyBindings(ko.net.loadViewModel('Main'));
+			});
+			
+			function convertTypeToColor(type) {
+				var color;
+				switch (ko.utils.unwrapObservable(type)) {
+					case EnumTypes.Type1:
+						color = "red";
+						break;
+					case EnumTypes.Type2:
+						color = "blue";
+						break;
+					case EnumTypes.Type3:
+						color = "green";
+						break;
+				}
+				return color;
+			}
+		</script>
+	</head>
+	<body>
+		<p>Text: <input data-bind="value: Text" /></p>
+		<h2><span data-bind="text: Text"> </span></h2>
+		
+		<p>Counter: <span data-bind="text: Counter"></span></p>
+		<p>
+			<button data-bind="command: IncrementCounterCommand">Increment</button>
+			<button data-bind="command: DecrementCounterCommand">Decrement</button>
+		</p>
+		<p>
+			<h4>Items</h4>
+			<ul data-bind="foreach: Items">
+				<li>
+					Item at position <span data-bind="text: $index"> </span>:
+					<span data-bind="text: Name, style: {color: convertTypeToColor(Type)}"> </span>
+					<a href="#" data-bind="command: $parent.RemoveItemCommand">Remove</a>
+				</li>
+			</ul>
+			<input data-bind="value: NewItemName" />
+			<button data-bind="command: AddItemCommand">Add</button>
+		</p>
+		<p><button data-bind="command: ForceGCCommand">Force GC</button></p>
+		<p><select data-bind="options: Options, value: SelectedOption, optionsCaption: 'Select an item...'"></select></p>
+		<h2><span data-bind="text: SelectedOption"></span></h2>
+	</body>
+</html>
