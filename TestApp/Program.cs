@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
+using Knockout.Net;
 
 namespace TestApp
 {
@@ -11,7 +13,8 @@ namespace TestApp
 		[STAThread]
 		static void Main()
 		{
-			Gecko.Xpcom.Initialize("..\\lib\\xulrunner");
+            KOControl.InitializeGeckoFx();
+			//Gecko.Xpcom.Initialize("..\\lib\\xulrunner");
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new MainForm());

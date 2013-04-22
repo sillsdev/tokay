@@ -50,7 +50,12 @@ namespace Knockout.Net
 			_browser.JavascriptError += _browser_JavascriptError;
 		}
 
-		public string CurrentView
+        public static void InitializeGeckoFx()//todo: make it so client doesn't need to call this explicitly
+        {
+            GeckoFxInitializer.SetUpXulRunner();
+        }
+
+	    public string CurrentView
 		{
 			get { return _currentView; }
 			set
