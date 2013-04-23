@@ -46,6 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChorusSendReceiveSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChorusSendReceiveSettingsDialog.Designer.cs">
+      <DependentUpon>ChorusSendReceiveSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChorusSendReceiveSettingsModel.cs" />
     <Compile Include="ChorusStartDialogViewModel.cs" />
     <Compile Include="FileLocator.cs" />
     <Compile Include="StartDialog.cs">
@@ -90,6 +97,7 @@
   <ItemGroup>
     <Content Include="css\ChorusStartDialog.css" />
     <Content Include="html\ChorusStartupView.html" />
+    <Content Include="html\SendReceiveSettings.html" />
     <Content Include="img\Usb32x28.png" />
     <Content Include="img\Usb64x64.png" />
   </ItemGroup>

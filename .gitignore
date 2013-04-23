@@ -1,0 +1,7 @@
+*/obj/**
+**.dll
+lib/xulrunner/**
+**.exe
+**.pdb
+**.manifest
+output/**
