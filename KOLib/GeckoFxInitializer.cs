@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace Knockout.Net
 {
@@ -26,7 +28,21 @@ namespace Knockout.Net
             //Review: an early tester found that wrong xpcom was being loaded. The following solution is from http://www.geckofx.org/viewtopic.php?id=74&action=new
             SetDllDirectory(xulRunnerPath);
 
-            Gecko.Xpcom.Initialize(xulRunnerPath);
+	        try
+	        {
+				Gecko.Xpcom.Initialize(xulRunnerPath);
+	        }
+	        catch (Exception)
+	        {
+#if DEBUG
+				MessageBox.Show("Make sure the directory holding XulRunner 18 is at lib/XulRunner. We'll open a browser there for you now.");
+				Process.Start("http://ftp.mozilla.org/pub/mozilla.org/xulrunner/releases/18.0.2/runtimes/");
+		        Environment.FailFast("Exiting Tokay");
+#endif
+
+		        throw;
+	        }
+	        
         }
 
         /// <summary>
