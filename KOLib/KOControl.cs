@@ -85,9 +85,17 @@ namespace Knockout.Net
 			}
 		}
 
-		private void _browser_JavascriptError(object sender, JavascriptErrorEventArgs e)
+		private void _browser_JavascriptError(object sender, JavascriptErrorEventArgs error)
 		{
-			throw new NotImplementedException();
+			var msg = string.Format("There was a JScript error in {0} at line {1}: {2}",
+										error.Filename, error.Line, error.Message);
+
+			if(msg.Contains("$ is not defined"))
+			{
+				msg += Environment.NewLine + Environment.NewLine + "Make sure jquery is properly referenced";
+			}
+		
+			MessageBox.Show(msg, "Javascript Error", MessageBoxButtons.OK);
 		}
 
 		protected override void OnLoad(EventArgs e)
