@@ -95,7 +95,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="css\" />
     <Folder Include="img\" />
     <Folder Include="js\" />
   </ItemGroup>
@@ -103,7 +102,6 @@
     <Content Include="StartDialog\StartView.css" />
     <Content Include="StartDialog\StartView.html" />
     <Content Include="css\ChorusStartDialog.css" />
-    <Content Include="html\ChorusStartupView.html" />
     <Content Include="html\ChorusSendReceiveSettings.html" />
     <Content Include="StartDialog\Usb32x28.png" />
   </ItemGroup>
