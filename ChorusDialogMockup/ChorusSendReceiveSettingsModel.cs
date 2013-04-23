@@ -6,7 +6,14 @@ using Knockout.Net;
 
 namespace ChorusDialogMockup
 {
-	class ChorusSendReceiveSettingsModel : ObservableObject
+	public class ChorusSendReceiveSettingsModel : ObservableObject
 	{
+		private string _userName;
+
+		public string UserName
+		{
+			get { return _userName; }
+			set { Set(() => UserName, ref _userName, value); }
+		}
 	}
 }

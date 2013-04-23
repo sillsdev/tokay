@@ -63,6 +63,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ChorusSendReceiveSettingsDialog.resx">
+      <DependentUpon>ChorusSendReceiveSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -95,9 +98,10 @@
     <Folder Include="js\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\ChorusSendReceiveSettings.css" />
     <Content Include="css\ChorusStartDialog.css" />
     <Content Include="html\ChorusStartupView.html" />
-    <Content Include="html\SendReceiveSettings.html" />
+    <Content Include="html\ChorusSendReceiveSettings.html" />
     <Content Include="img\Usb32x28.png" />
     <Content Include="img\Usb64x64.png" />
   </ItemGroup>

@@ -13,16 +13,17 @@ namespace ChorusDialogMockup
 	public partial class ChorusSendReceiveSettingsDialog : Form
 	{
 		private readonly KOControl _ko;
-		private ChorusSendReceiveSettingsModel _model;
+
+		public ChorusSendReceiveSettingsModel Model { get; set; }
 
 		public ChorusSendReceiveSettingsDialog()
         {
             InitializeComponent();
 
-			_ko = new KOControl(GetObject, FileLocator.GetFileDistributedWithApplication("html/SendReceiveSettings.html"));
+			_ko = new KOControl(GetObject, FileLocator.GetFileDistributedWithApplication("html/ChorusSendReceiveSettings.html"));
 			Controls.Add(_ko);
 			_ko.Dock = DockStyle.Fill;
-			_model = new ChorusSendReceiveSettingsModel();
+			Model = new ChorusSendReceiveSettingsModel();
 		}
 
 
@@ -31,7 +32,7 @@ namespace ChorusDialogMockup
 			switch (name)
 			{
 				case "ChorusSendReceiveSettingsModel":
-					return _model;
+					return Model;
 			}
 
 			return null;

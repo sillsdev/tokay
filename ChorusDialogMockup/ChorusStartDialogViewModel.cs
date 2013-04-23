@@ -14,6 +14,7 @@ namespace ChorusDialogMockup
 		private string _usbFlashDriveStatusMessage;
 		private string _internetStatusMessage;
 		private string _chorusHubStatusMessage;
+		private ChorusSendReceiveSettingsModel _sendReceiveSettings = new ChorusSendReceiveSettingsModel();
 
 		public ChorusStartDialogViewModel()
 		{
@@ -28,7 +29,9 @@ namespace ChorusDialogMockup
 
 		private object LaunchSettingsDialog()
 		{
-			new ChorusSendReceiveSettingsDialog().Show();
+			var chorusSendReceiveSettingsDialog = new ChorusSendReceiveSettingsDialog();
+			chorusSendReceiveSettingsDialog.Model = _sendReceiveSettings;
+			chorusSendReceiveSettingsDialog.Show();
 			return null; // what object is it supposed to return??
 		}
 
