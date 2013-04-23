@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../css/ChorusStartDialog.css"/>
+    <script type="text/javascript" src="../../lib/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="../../lib/knockout-2.2.1.debug.js"></script>
+	<script type="text/javascript" src="../../js/knockout.net.js"></script>
+    <script type='text/javascript'>
+        $(function () {
+            ko.applyBindings(ko.net.loadViewModel('ChorusStartDialogViewModel'));
+        });
+		</script>
+</head>
+<body>
+<!-- Label this point in project history (optional)
+    <br/>
+    <input type="text" name="historyComment"/>
+    <br/>
+    -->
+    <button type="submit" id="UsbFlashDriveButton" data-bind="command: UseUSBFlashDriveCommand"><img src="../img/Usb32x28.png">USB Flash Drive</button>   
+    
+    <!-- <div id="checkingUSBStatus">Status of checking for usb</div>-->
+</body>
+</html>

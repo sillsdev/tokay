@@ -14,7 +14,6 @@ namespace TestApp
 		static void Main()
 		{
             KOControl.InitializeGeckoFx();
-			//Gecko.Xpcom.Initialize("..\\lib\\xulrunner");
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new MainForm());
