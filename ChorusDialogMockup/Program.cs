@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
-using Knockout.Net;
 
 namespace ChorusDialogMockup
 {
@@ -14,7 +11,6 @@ namespace ChorusDialogMockup
         [STAThread]
         static void Main()
         {
-			KOControl.InitializeGeckoFx();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new StartDialog());

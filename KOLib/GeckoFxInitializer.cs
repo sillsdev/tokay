@@ -13,6 +13,9 @@ namespace Knockout.Net
     
         public static void SetUpXulRunner()
         {
+	        if (Gecko.Xpcom.IsInitialized)
+		        return;
+
             string xulRunnerPath = Path.Combine(DirectoryOfApplicationOrSolution, "xulrunner");
             if (!Directory.Exists(xulRunnerPath))
             {

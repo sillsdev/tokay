@@ -18,6 +18,8 @@ namespace Knockout.Net
 {
 	public class KOControl : UserControl
 	{
+		public event EventHandler ViewLoaded;
+
 		private readonly ConditionalWeakTable<object, ObjectData> _objects;
 		private readonly Dictionary<string, WeakReference> _idsToObjects; 
 		private readonly GeckoWebBrowser _browser;
@@ -32,6 +34,8 @@ namespace Knockout.Net
 
 		public KOControl(Func<string, object> getObject, string pathToStartupViewHtml)
 		{
+			GeckoFxInitializer.SetUpXulRunner();
+
             if(!File.Exists(pathToStartupViewHtml))
                 throw new ApplicationException(pathToStartupViewHtml + " does not exist");
 			_getObject = getObject;
@@ -52,10 +56,12 @@ namespace Knockout.Net
 			_browser.JavascriptError += _browser_JavascriptError;
 		}
 
-        public static void InitializeGeckoFx()//todo: make it so client doesn't need to call this explicitly
-        {
-            GeckoFxInitializer.SetUpXulRunner();
-        }
+		private void _browser_DocumentCompleted(object sender, EventArgs e)
+		{
+			_browser.DocumentCompleted -= _browser_DocumentCompleted;
+			if (ViewLoaded != null)
+				ViewLoaded(this, new EventArgs());
+		}
 
 	    public string CurrentView
 		{
@@ -104,6 +110,7 @@ namespace Knockout.Net
 //			if (!Path.IsPathRooted(path)) now requires the client to give us the actual path
 //				path = Path.Combine(Directory.GetCurrentDirectory(), path);
 			var uri = new Uri(path);
+			_browser.DocumentCompleted += _browser_DocumentCompleted;
 			_browser.Navigate(uri.AbsoluteUri);
 		}
 
@@ -472,12 +479,13 @@ namespace Knockout.Net
 			}
 		}
 
-		private void ExecuteScript(string script)
+		private string ExecuteScript(string script)
 		{
 			using (var context = new AutoJSContext(_browser.JSContext))
 			{
 				string result;
 				context.EvaluateScript(script, out result);
+				return result;
 			}
 		}
 

@@ -14,13 +14,25 @@
 		</script>
 </head>
 <body>
-<!-- Label this point in project history (optional)
-    <br/>
-    <input type="text" name="historyComment"/>
-    <br/>
-    -->
-    <button type="submit" id="UsbFlashDriveButton" data-bind="command: UseUSBFlashDriveCommand"><img src="../img/Usb32x28.png">USB Flash Drive</button>   
-    
-    <!-- <div id="checkingUSBStatus">Status of checking for usb</div>-->
+	<p>
+		Label this point in project history (Optional):
+		<br/>
+		<input data-bind="value: CommitMessage" />
+	</p>
+    <p>
+		<button data-bind="command: UseUSBFlashDriveCommand"><img src="../img/Usb32x28.png">USB Flash Drive</button>
+		<br/>
+		<span data-bind="text: USBFlashDriveStatusMessage"> </span>
+	</p>
+    <p>
+		<button data-bind="command: UseInternetCommand"><img src="../img/internet29x32.png">Internet</button>
+		<br/>
+		<span data-bind="text: InternetStatusMessage"> </span>
+	</p>
+    <p>
+		<button data-bind="command: UseChorusHubCommand"><img src="../img/chorusHubMedium.png">Chorus Hub</button>
+		<br/>
+		<span data-bind="text: ChorusHubStatusMessage"> </span>
+	</p>
 </body>
 </html>
