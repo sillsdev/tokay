@@ -34,10 +34,12 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(496, 440);
+			this.ClientSize = new System.Drawing.Size(496, 384);
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
 			this.Name = "StartDialog";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Form1";
+			this.Text = "Send/Receive";
 			this.ResumeLayout(false);
 
         }

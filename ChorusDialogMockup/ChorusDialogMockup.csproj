@@ -95,13 +95,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="css\" />
     <Folder Include="img\" />
     <Folder Include="js\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="StartDialog\chorusHubMedium.png" />
+    <Content Include="StartDialog\internet29x32.png" />
+    <Content Include="StartDialog\settings16x16.png" />
     <Content Include="StartDialog\StartView.css" />
     <Content Include="StartDialog\StartView.html" />
-    <Content Include="css\ChorusStartDialog.css" />
     <Content Include="html\ChorusSendReceiveSettings.html" />
     <Content Include="StartDialog\Usb32x28.png" />
   </ItemGroup>

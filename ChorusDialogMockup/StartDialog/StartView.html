@@ -12,6 +12,7 @@
             ko.applyBindings(ko.net.loadViewModel('StartViewModel'));
         });
 		</script>
+
 </head>
 <body>
 	<p>
@@ -20,22 +21,22 @@
 		<input data-bind="value: CommitMessage" />
 	</p>
     <p>
-		<button data-bind="command: UseUSBFlashDriveCommand"><img src="../img/Usb32x28.png">USB Flash Drive</button>
+		<button data-bind="command: UseUSBFlashDriveCommand"><img src="Usb32x28.png">USB Flash Drive</button>
 		<br/>
-		<span data-bind="text: USBFlashDriveStatusMessage"> </span>
+		<span class="statusLabel" data-bind="text: USBFlashDriveStatusMessage">Lorum Ipsum</span>
 	</p>
     <p>
-		<button data-bind="command: UseInternetCommand"><img src="../img/internet29x32.png">Internet</button>
+		<button data-bind="command: UseInternetCommand"><img src="internet29x32.png">Internet</button>
 		<br/>
-		<span data-bind="text: InternetStatusMessage"> </span>
+		<span class="statusLabel" data-bind="text: InternetStatusMessage"> </span>
 	</p>
 	<p>
-		<button data-bind="command: UseChorusHubCommand"><img src="../img/chorusHubMedium.png">Chorus Hub</button>
+		<button data-bind="command: UseChorusHubCommand"><img src="chorusHubMedium.png">Chorus Hub</button>
 		<br/>
-		<span data-bind="text: ChorusHubStatusMessage"> </span>
+		<span class="statusLabel" data-bind="text: ChorusHubStatusMessage"> </span>
 	</p>
 	<p>
-		<button data-bind="command: ShowSettingsDialogCommand">Settings</button>
+		<button id="settingsButton" data-bind="command: ShowSettingsDialogCommand"><img src="settings16x16.png">Settings...</button>
 	</p>
 </body>
 </html>
