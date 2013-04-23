@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="StartView.css"/>
+    <script type="text/javascript" src="../../lib/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="../../lib/knockout-2.2.1.debug.js"></script>
+	<script type="text/javascript" src="../../js/knockout.net.js"></script>
+    <script type='text/javascript'>
+        $(function () {
+            ko.applyBindings(ko.net.loadViewModel('StartViewModel'));
+        });
+		</script>
+</head>
+<body>
+	<p>
+		Label this point in project history (Optional):
+		<br/>
+		<input data-bind="value: CommitMessage" />
+	</p>
+    <p>
+		<button data-bind="command: UseUSBFlashDriveCommand"><img src="../img/Usb32x28.png">USB Flash Drive</button>
+		<br/>
+		<span data-bind="text: USBFlashDriveStatusMessage"> </span>
+	</p>
+    <p>
+		<button data-bind="command: UseInternetCommand"><img src="../img/internet29x32.png">Internet</button>
+		<br/>
+		<span data-bind="text: InternetStatusMessage"> </span>
+	</p>
+	<p>
+		<button data-bind="command: UseChorusHubCommand"><img src="../img/chorusHubMedium.png">Chorus Hub</button>
+		<br/>
+		<span data-bind="text: ChorusHubStatusMessage"> </span>
+	</p>
+	<p>
+		<button data-bind="command: ShowSettingsDialogCommand">Settings</button>
+	</p>
+</body>
+</html>

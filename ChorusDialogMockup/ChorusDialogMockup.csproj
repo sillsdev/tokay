@@ -53,12 +53,12 @@
       <DependentUpon>ChorusSendReceiveSettingsDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="ChorusSendReceiveSettingsModel.cs" />
-    <Compile Include="ChorusStartDialogViewModel.cs" />
+    <Compile Include="StartDialog\StartViewModel.cs" />
     <Compile Include="FileLocator.cs" />
-    <Compile Include="StartDialog.cs">
+    <Compile Include="StartDialog\StartDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StartDialog.Designer.cs">
+    <Compile Include="StartDialog\StartDialog.Designer.cs">
       <DependentUpon>StartDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -75,7 +75,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="StartDialog.resx">
+    <EmbeddedResource Include="StartDialog\StartDialog.resx">
       <DependentUpon>StartDialog.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -95,15 +95,17 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="css\" />
+    <Folder Include="img\" />
     <Folder Include="js\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="css\ChorusSendReceiveSettings.css" />
+    <Content Include="StartDialog\StartView.css" />
+    <Content Include="StartDialog\StartView.html" />
     <Content Include="css\ChorusStartDialog.css" />
     <Content Include="html\ChorusStartupView.html" />
     <Content Include="html\ChorusSendReceiveSettings.html" />
-    <Content Include="img\Usb32x28.png" />
-    <Content Include="img\Usb64x64.png" />
+    <Content Include="StartDialog\Usb32x28.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

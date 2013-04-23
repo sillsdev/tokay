@@ -1,10 +1,11 @@
 ﻿using System.Diagnostics;
+using System.Windows.Forms;
 using System.Windows.Input;
 using Knockout.Net;
 
-namespace ChorusDialogMockup
+namespace ChorusDialogMockup.StartDialog
 {
-	public class ChorusStartDialogViewModel : ObservableObject
+	public class StartViewModel : ObservableObject
 	{
 		private string _commitMessage;
 		private readonly ICommand _useUSBFlashDriveCommand;
@@ -15,17 +16,43 @@ namespace ChorusDialogMockup
 		private string _internetStatusMessage;
 		private string _chorusHubStatusMessage;
 		private ChorusSendReceiveSettingsModel _sendReceiveSettings = new ChorusSendReceiveSettingsModel();
+		private Timer _simulateDoneCheckingTimer;
+		private bool _interentIsAvailable;
 
-		public ChorusStartDialogViewModel()
+		public StartViewModel()
 		{
-			_useUSBFlashDriveCommand = new RelayCommand(()=>Debug.WriteLine("Use Flash Drive Clicked"));
-			_useInternetCommand = new RelayCommand(()=>Debug.WriteLine("Use Internet Clicked"));
-			_useChorusHubCommand = new RelayCommand(()=>Debug.WriteLine("Use Chorus Hub Clicked"));
+			_simulateDoneCheckingTimer = new System.Windows.Forms.Timer { Interval = 2000, Enabled = true };
+			_simulateDoneCheckingTimer.Tick += SimulateDoneCheckingTimerTick;
+
+			_useUSBFlashDriveCommand = new RelayCommand(() => Debug.WriteLine("Use Flash Drive Clicked"), () => InternetAvailable);
+
+
+			_useInternetCommand = new RelayCommand(() => Debug.WriteLine("Use Internet Clicked"), () => InternetAvailable);
+			_useChorusHubCommand = new RelayCommand(()=>Debug.WriteLine("Use Chorus Hub Clicked"), ()=>false);
 			_showSettingsDialogCommand = new RelayCommand(() => LaunchSettingsDialog());
 			_usbFlashDriveStatusMessage = "Checking...";
 			_internetStatusMessage = "Checking...";
 			_chorusHubStatusMessage = "Checking...";
 		}
+
+
+
+		public bool InternetAvailable
+		{
+			get { return false; }
+			set { Set(() => InternetAvailable, ref _interentIsAvailable, value); }
+		}
+
+		private void SimulateDoneCheckingTimerTick(object sender, System.EventArgs e)
+		{
+			_simulateDoneCheckingTimer.Enabled = false;
+			USBFlashDriveStatusMessage = "Found at z:/";
+			InternetStatusMessage = "Ready";
+			ChorusHubStatusMessage = "Not found";
+
+			InternetAvailable = true;
+		}
+
 
 		private object LaunchSettingsDialog()
 		{
@@ -78,6 +105,5 @@ namespace ChorusDialogMockup
 			get { return _chorusHubStatusMessage; }
 			set { Set(() => ChorusHubStatusMessage, ref _chorusHubStatusMessage, value); }
 		}
-
 	}
 }

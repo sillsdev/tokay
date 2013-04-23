@@ -13,7 +13,6 @@ namespace TestApp
 		[STAThread]
 		static void Main()
 		{
-            KOControl.InitializeGeckoFx();
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new MainForm());

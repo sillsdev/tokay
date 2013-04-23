@@ -5,3 +5,4 @@ lib/xulrunner/**
 **.pdb
 **.manifest
 output/**
+*.suo

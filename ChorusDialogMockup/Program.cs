@@ -13,7 +13,7 @@ namespace ChorusDialogMockup
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new StartDialog());
+            Application.Run(new StartDialog.StartDialog());
         }
     }
 }
