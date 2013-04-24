@@ -3,9 +3,9 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using Knockout.Net;
 
-namespace ChorusDialogMockup.StartDialog
+namespace ChorusDialogMockup.SyncDialog
 {
-	public class StartViewModel : ObservableObject
+	public class SyncStartViewModel : ObservableObject
 	{
 		private string _commitMessage;
 		private readonly ICommand _useUSBFlashDriveCommand;
@@ -15,31 +15,34 @@ namespace ChorusDialogMockup.StartDialog
 		private string _usbFlashDriveStatusMessage;
 		private string _internetStatusMessage;
 		private string _chorusHubStatusMessage;
-		private ChorusSendReceiveSettingsModel _sendReceiveSettings = new ChorusSendReceiveSettingsModel();
-		private Timer _simulateDoneCheckingTimer;
+		private readonly ChorusSendReceiveSettingsModel _sendReceiveSettings = new ChorusSendReceiveSettingsModel();
+		private readonly Timer _simulateDoneCheckingTimer;
 		private bool _interentIsAvailable;
+		private bool _usbAvailable;
 
-		public StartViewModel()
+		public SyncStartViewModel(SyncViewModel syncViewModel)
 		{
-			_simulateDoneCheckingTimer = new System.Windows.Forms.Timer { Interval = 2000, Enabled = true };
+			_simulateDoneCheckingTimer = new Timer { Interval = 2000, Enabled = true };
 			_simulateDoneCheckingTimer.Tick += SimulateDoneCheckingTimerTick;
 
-			_useUSBFlashDriveCommand = new RelayCommand(() => Debug.WriteLine("Use Flash Drive Clicked"), () => InternetAvailable);
-
-
-			_useInternetCommand = new RelayCommand(() => Debug.WriteLine("Use Internet Clicked"), () => InternetAvailable);
-			_useChorusHubCommand = new RelayCommand(()=>Debug.WriteLine("Use Chorus Hub Clicked"), ()=>false);
+			_useUSBFlashDriveCommand = new RelayCommand(() => syncViewModel.StartSync(), () => UsbAvailable);
+			_useInternetCommand = new RelayCommand(() => syncViewModel.StartSync(), () => InternetAvailable);
+			_useChorusHubCommand = new RelayCommand(() => syncViewModel.StartSync(), () => false);
 			_showSettingsDialogCommand = new RelayCommand(() => LaunchSettingsDialog());
 			_usbFlashDriveStatusMessage = "Checking...";
 			_internetStatusMessage = "Checking...";
 			_chorusHubStatusMessage = "Checking...";
 		}
 
-
+		public bool UsbAvailable
+		{
+			get { return _usbAvailable; }
+			set { Set(() => UsbAvailable, ref _usbAvailable, value); }
+		}
 
 		public bool InternetAvailable
 		{
-			get { return false; }
+			get { return _interentIsAvailable; }
 			set { Set(() => InternetAvailable, ref _interentIsAvailable, value); }
 		}
 
@@ -50,9 +53,9 @@ namespace ChorusDialogMockup.StartDialog
 			InternetStatusMessage = "Ready";
 			ChorusHubStatusMessage = "Not found";
 
+			UsbAvailable = true;
 			InternetAvailable = true;
 		}
-
 
 		private object LaunchSettingsDialog()
 		{

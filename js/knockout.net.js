@@ -170,4 +170,8 @@
 	exports._addEnumeration = function(name, data) {
 		window[name] = ko.utils.parseJson(data);
 	}
+	
+	exports.setDialogResult = function(result) {
+		fireEvent("setDialogResult", result);
+	}
 }));

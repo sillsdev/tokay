@@ -184,7 +184,7 @@ namespace ChorusDialogMockup
 		/// <example>GetFileDistributedWithApplication("info", "releaseNotes.htm");</example>
         public static string GetFileDistributedWithApplication(bool optional, params string[] partsOfTheSubPath)
 		{
-		    foreach (var directoryHoldingFiles in new []{null, "ChorusDialogMockup/StartDialog"})
+		    foreach (var directoryHoldingFiles in new []{null, "ChorusDialogMockup/SyncDialog"})
 		    {
                 var path = FileLocator.DirectoryOfApplicationOrSolution;
                 path = FileLocator.DirectoryOfApplicationOrSolution;

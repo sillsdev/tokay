@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="SyncView.css"/>
+	<link rel="stylesheet" type="text/css" href="../../lib/css/base/jquery-ui.min.css"/>
+    <script type="text/javascript" src="../../lib/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="../../lib/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../../lib/knockout-2.2.1.debug.js"></script>
+	<script type="text/javascript" src="../../lib/knockout-jqueryui.min.js"></script>
+	<script type="text/javascript" src="../../js/knockout.net.js"></script>
+    <script type='text/javascript'>
+        $(function () {
+            ko.applyBindings(ko.net.loadViewModel('SyncViewModel'));
+			$("#tabs").tabs();
+        });
+	</script>
+</head>
+<body>
+		<div data-bind="if: State() == SyncState.Start">
+			<div data-bind="with: Start">
+				<p>
+					Label this point in project history (Optional):
+					<br/>
+					<input data-bind="value: CommitMessage" />
+				</p>
+				<p>
+					<button class="optionButton" data-bind="command: UseUSBFlashDriveCommand"><img src="Usb32x28.png">USB Flash Drive</button>
+					<br/>
+					<span class="statusLabel" data-bind="text: USBFlashDriveStatusMessage">Lorum Ipsum</span>
+				</p>
+				<p>
+					<button class="optionButton" data-bind="command: UseInternetCommand"><img src="internet29x32.png">Internet</button>
+					<br/>
+					<span class="statusLabel" data-bind="text: InternetStatusMessage"> </span>
+				</p>
+				<p>
+					<button class="optionButton" data-bind="command: UseChorusHubCommand"><img src="chorusHubMedium.png">Chorus Hub</button>
+					<br/>
+					<span class="statusLabel" data-bind="text: ChorusHubStatusMessage"> </span>
+				</p>
+				<p>
+					<button id="settingsButton" data-bind="command: ShowSettingsDialogCommand"><img src="settings16x16.png">Settings...</button>
+				</p>
+			</div>
+		</div>
+		<div data-bind="if: State() == SyncState.Syncing">
+			<div data-bind="with: Status">
+				<table width="100%" border="0">
+					<tr>
+						<td width="48" height="48">
+							<img data-bind="visible: Progress() == 100" src="successIcon.png" />
+						</td>
+						<td>
+							<div style="width: 275px; height: 10px;" data-bind="progressbar: {value: Progress}"></div>
+						</td>
+						<td align="right">
+							<div data-bind="if: Progress() != 100">
+								<button class="closeButton" onclick="ko.net.setDialogResult('Cancel')">Cancel</button>
+							</div>
+							<div data-bind="if: Progress() == 100">
+								<button class="closeButton" onclick="ko.net.setDialogResult('OK')">Close</button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<div id="tabs">
+								<ul>
+									<li><a href="#fragment-1"><span>Log</span></a></li>
+								</ul>
+								<div id="fragment-1" style="height: 210px;">
+								</div>
+							</div>
+							<script type='text/javascript'>
+								$("#tabs").tabs();
+							</script>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+</body>
+</html>

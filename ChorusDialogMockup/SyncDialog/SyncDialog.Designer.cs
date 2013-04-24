@@ -1,6 +1,6 @@
-﻿namespace ChorusDialogMockup.StartDialog
+﻿namespace ChorusDialogMockup.SyncDialog
 {
-    partial class StartDialog
+    partial class SyncDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -30,14 +30,14 @@
         {
 			this.SuspendLayout();
 			// 
-			// StartDialog
+			// SyncDialog
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(496, 384);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
-			this.Name = "StartDialog";
+			this.Name = "SyncDialog";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Send/Receive";
 			this.ResumeLayout(false);

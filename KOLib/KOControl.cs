@@ -16,9 +16,25 @@ using Newtonsoft.Json.Linq;
 
 namespace Knockout.Net
 {
+	public class DialogCloseRequestedEventArgs : EventArgs
+	{
+		private readonly DialogResult _dialogResult;
+
+		public DialogCloseRequestedEventArgs(DialogResult dialogResult)
+		{
+			_dialogResult = dialogResult;
+		}
+
+		public DialogResult DialogResult
+		{
+			get { return _dialogResult; }
+		}
+	}
+
 	public class KOControl : UserControl
 	{
 		public event EventHandler ViewLoaded;
+		public event EventHandler<DialogCloseRequestedEventArgs> DialogCloseRequested; 
 
 		private readonly ConditionalWeakTable<object, ObjectData> _objects;
 		private readonly Dictionary<string, WeakReference> _idsToObjects; 
@@ -106,10 +122,28 @@ namespace Knockout.Net
 			_browser.AddMessageEventListener("updateCollection", UpdateCollection);
 			_browser.AddMessageEventListener("executeCommand", ExecuteCommand);
 			_browser.AddMessageEventListener("setContext", SetContext);
+			_browser.AddMessageEventListener("setDialogResult", SetDialogResult);
 
 			LoadCurrentView();
 			_browser.ResetCursor();
 			_loaded = true;
+		}
+
+		private void SetDialogResult(string result)
+		{
+			var dialogResult = DialogResult.None;
+			switch (result.ToLowerInvariant())
+			{
+				case "ok":
+					dialogResult = DialogResult.OK;
+					break;
+
+				case "cancel":
+					dialogResult = DialogResult.Cancel;
+					break;
+			}
+			if (DialogCloseRequested != null)
+				DialogCloseRequested(this, new DialogCloseRequestedEventArgs(dialogResult));
 		}
 
 		private void LoadCurrentView()
