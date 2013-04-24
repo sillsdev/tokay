@@ -57,10 +57,10 @@
 						</td>
 						<td align="right">
 							<div data-bind="if: Progress() != 100">
-								<button class="closeButton" onclick="ko.net.setDialogResult('Cancel')">Cancel</button>
+								<button class="closeButton" onclick="ko.net.closeDialog('Cancel')">Cancel</button>
 							</div>
 							<div data-bind="if: Progress() == 100">
-								<button class="closeButton" onclick="ko.net.setDialogResult('OK')">Close</button>
+								<button class="closeButton" onclick="ko.net.closeDialog('OK')">Close</button>
 							</div>
 						</td>
 					</tr>

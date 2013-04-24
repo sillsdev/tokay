@@ -171,7 +171,7 @@
 		window[name] = ko.utils.parseJson(data);
 	}
 	
-	exports.setDialogResult = function(result) {
-		fireEvent("setDialogResult", result);
+	exports.closeDialog = function(result) {
+		fireEvent("closeDialog", result);
 	}
 }));

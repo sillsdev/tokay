@@ -16,10 +16,10 @@ namespace ChorusDialogMockup.SyncDialog
 			Controls.Add(_ko);
 			_ko.Dock = DockStyle.Fill;
 			_syncViewModel = new SyncViewModel();
-			_ko.DialogCloseRequested += _ko_DialogCloseRequested;
+			_ko.CloseDialogRequested += _ko_CloseDialogRequested;
 		}
 
-		private void _ko_DialogCloseRequested(object sender, DialogCloseRequestedEventArgs e)
+		private void _ko_CloseDialogRequested(object sender, CloseDialogRequestedEventArgs e)
 		{
 			DialogResult = e.DialogResult;
 			Close();

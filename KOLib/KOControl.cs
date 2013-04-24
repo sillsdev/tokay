@@ -16,11 +16,11 @@ using Newtonsoft.Json.Linq;
 
 namespace Knockout.Net
 {
-	public class DialogCloseRequestedEventArgs : EventArgs
+	public class CloseDialogRequestedEventArgs : EventArgs
 	{
 		private readonly DialogResult _dialogResult;
 
-		public DialogCloseRequestedEventArgs(DialogResult dialogResult)
+		public CloseDialogRequestedEventArgs(DialogResult dialogResult)
 		{
 			_dialogResult = dialogResult;
 		}
@@ -34,7 +34,7 @@ namespace Knockout.Net
 	public class KOControl : UserControl
 	{
 		public event EventHandler ViewLoaded;
-		public event EventHandler<DialogCloseRequestedEventArgs> DialogCloseRequested; 
+		public event EventHandler<CloseDialogRequestedEventArgs> CloseDialogRequested; 
 
 		private readonly ConditionalWeakTable<object, ObjectData> _objects;
 		private readonly Dictionary<string, WeakReference> _idsToObjects; 
@@ -122,14 +122,14 @@ namespace Knockout.Net
 			_browser.AddMessageEventListener("updateCollection", UpdateCollection);
 			_browser.AddMessageEventListener("executeCommand", ExecuteCommand);
 			_browser.AddMessageEventListener("setContext", SetContext);
-			_browser.AddMessageEventListener("setDialogResult", SetDialogResult);
+			_browser.AddMessageEventListener("closeDialog", CloseDialog);
 
 			LoadCurrentView();
 			_browser.ResetCursor();
 			_loaded = true;
 		}
 
-		private void SetDialogResult(string result)
+		private void CloseDialog(string result)
 		{
 			var dialogResult = DialogResult.None;
 			switch (result.ToLowerInvariant())
@@ -142,8 +142,8 @@ namespace Knockout.Net
 					dialogResult = DialogResult.Cancel;
 					break;
 			}
-			if (DialogCloseRequested != null)
-				DialogCloseRequested(this, new DialogCloseRequestedEventArgs(dialogResult));
+			if (CloseDialogRequested != null)
+				CloseDialogRequested(this, new CloseDialogRequestedEventArgs(dialogResult));
 		}
 
 		private void LoadCurrentView()
