@@ -39,15 +39,18 @@ BUTTON IMG
 }
 BUTTON
 {
-	line-height: 32px;
 	font-family: Verdana;
-	width: 136px;
+	width: 82px;
 	text-align: left;
-	height: 34px;
+	height: 24px;
 	padding-top: 0px;
 	padding-bottom: 0px;
 	margin-bottom: 0px;
 	margin-top: 7px;
+}
+.serverChooser
+{
+	width: 268px;
 }
 #bottomRightButtonCluster
 {
