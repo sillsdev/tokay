@@ -17,15 +17,15 @@
 	<title>SendReceiveSettings</title>
 </head>
 <body>
-	<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+	<table>
 		<tbody>
 			<tr>
 				<td>
-					<img style="width: 64px; height: 58px;" alt="committer" src="../img/Committer%20Person.png">
+					<img id="personIcon" alt="committer" src="../img/Committer%20Person.png">
 				</td>
 				<td>
 					Name to show in change history:<br>
-					<input name="UserName" />
+					<input id="userName" name="UserName" />
 				</td>
 			</tr>
 		</tbody>
@@ -37,11 +37,11 @@
 			<li><a href="#fragment-2"><span>Chorus Hub</span></a></li>
 		</ul>
 		<div id="fragment-1">
-			<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+			<table>
 				<tbody>
 					<tr>
 						<td rowspan="7" valign="top">
-							<img style="width: 59px; height: 64px;" alt="committer" src="../img/internet59x64.png">
+							<img class="connectionTypeIcon" alt="committer" src="../img/internet59x64.png">
 						</td>
 						<td>
 						</td>
@@ -54,7 +54,7 @@
 						<td class="label">
 						Server
 						<td>
-							<button value="LanguageDepot.org" name="ChooseServer" type="button">
+							<button class="serverChooser" value="LanguageDepot.org" name="ChooseServer" type="button">
 								LanguageDepot.org</button>
 						</td>
 					</tr>
@@ -125,11 +125,14 @@
 			</div>
 		</div>
 	</div>
-	<div>
-		<img style="width: 48px; height: 48px;" alt="lockOpen" src="../img/lockOpen48x48.png"/><a href="somewhere">Settings Protection...</a>
-		<button value="OK" type="button"style="text-align: center">OK</button>
-		<button value="Cancel" type="button"style="text-align: center">Cancel</button>
-		<button value="Help" type="button"style="text-align: center">Help</button>
+	<div id="bottomButtonRow">
+	    <img alt="lockOpen" src="../img/lockOpen48x48.png"/><a href="somewhere">Settings Protection...</a>
+
+	    <div id="bottomRightButtonCluster">
+	        <button class="defaultButton" value="OK" type="button"style="text-align: center">OK</button>
+	        <button value="Cancel" type="button"style="text-align: center">Cancel</button>
+	        <button value="Help" type="button"style="text-align: center">Help</button>
+        </div>
 	</div>
 	<script type="text/javascript">
 		$("#tabs").tabs();
