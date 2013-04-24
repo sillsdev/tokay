@@ -1,18 +1,35 @@
 BODY
 {
-	background-color:#d7e4f2;
+	background-color: #D7E4F2;
 	margin: 10px 20px;
+	font-family: verdana;
+	font-size: 9pt;
+}
+.statusLabel
+{
+	color: #8C8484;
 }
 BUTTON IMG
 {
 	vertical-align: middle;
+	padding-right: 12px;
 }
 BUTTON
 {
 	line-height: 42px;
-	font-family: Verdana;
 	width: 175px;
 	text-align: left;
+}
+#settingsButton
+{
+	/*+placement:float-right 17px -7px;*/
+	float: right;
+	position: relative;
+	left: 17px;
+	top: -7px;
+	background: transparent;
+	border: 1px none #000000;
+	width: 113px;
 }
 INPUT
 {
