@@ -5,7 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Knockout.Net
+namespace TokaySharp
 {
 	public class ObservableObject : INotifyPropertyChanged, INotifyPropertyChanging
 	{

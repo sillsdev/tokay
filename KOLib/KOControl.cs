@@ -9,12 +9,11 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
-using System.Windows.Input;
 using Gecko;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Knockout.Net
+namespace TokaySharp
 {
 	public class CloseDialogRequestedEventArgs : EventArgs
 	{
@@ -44,7 +43,7 @@ namespace Knockout.Net
 		private readonly SimpleMonitor _propertyMonitor;
 		private DateTime _lastCleanup;
 		private readonly Func<string, object> _getObject;
-		private string _currentView;
+		private string _currentViewHtmlPath;
 		private bool _loaded;
 		private readonly HashSet<Type> _enumerations; 
 
@@ -55,7 +54,7 @@ namespace Knockout.Net
             if(!File.Exists(pathToStartupViewHtml))
                 throw new ApplicationException(pathToStartupViewHtml + " does not exist");
 			_getObject = getObject;
-			_currentView = pathToStartupViewHtml;
+			_currentViewHtmlPath = pathToStartupViewHtml;
 			_collectionMonitor = new SimpleMonitor();
 			_propertyMonitor = new SimpleMonitor();
 			_lastCleanup = DateTime.Now;
@@ -79,12 +78,12 @@ namespace Knockout.Net
 				ViewLoaded(this, new EventArgs());
 		}
 
-	    public string CurrentView
+	    public string CurrentViewHtmlPath
 		{
-			get { return _currentView; }
+			get { return _currentViewHtmlPath; }
 			set
 			{
-				_currentView = value;
+				_currentViewHtmlPath = value;
 				if (_loaded)
 					LoadCurrentView();
 			}
@@ -148,10 +147,8 @@ namespace Knockout.Net
 
 		private void LoadCurrentView()
 		{
-			string path = _currentView;
-//			if (!Path.IsPathRooted(path)) now requires the client to give us the actual path
-//				path = Path.Combine(Directory.GetCurrentDirectory(), path);
-			var uri = new Uri(path);
+			//todo: string path = TokayPreprocessor.PreprocessFile(_currentViewHtmlPath);
+			var uri = new Uri(_currentViewHtmlPath);
 			_browser.DocumentCompleted += _browser_DocumentCompleted;
 			_browser.Navigate(uri.AbsoluteUri);
 		}

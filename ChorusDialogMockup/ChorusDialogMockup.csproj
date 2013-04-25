@@ -97,11 +97,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="css\" />
     <Folder Include="img\" />
     <Folder Include="js\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\ChorusSendReceiveSettings.css" />
+    <Content Include="SettingsProtection\SettingsProtectionButton.html" />
+    <Content Include="SettingsProtection\lockClosed48x48.png" />
+    <Content Include="SettingsProtection\lockOpen48x48.png" />
     <Content Include="SyncDialog\chorusHubMedium.png" />
     <Content Include="SyncDialog\internet29x32.png" />
     <Content Include="SyncDialog\settings16x16.png" />

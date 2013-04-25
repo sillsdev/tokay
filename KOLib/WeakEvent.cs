@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace Knockout.Net
+namespace TokaySharp
 {
     public class WeakEvent<TDelegate> where TDelegate : class
     {

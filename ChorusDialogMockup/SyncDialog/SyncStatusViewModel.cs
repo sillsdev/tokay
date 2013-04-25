@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using Knockout.Net;
+using TokaySharp;
 
 namespace ChorusDialogMockup.SyncDialog
 {

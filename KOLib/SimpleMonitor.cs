@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Knockout.Net
+namespace TokaySharp
 {
 	public class SimpleMonitor : IDisposable
 	{

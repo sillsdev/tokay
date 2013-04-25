@@ -40,9 +40,10 @@
 					<br/>
 					<span class="statusLabel" data-bind="text: ChorusHubStatusMessage"> </span>
 				</p>
-				<p>
-					<button id="settingsButton" data-bind="command: ShowSettingsDialogCommand"><img src="settings16x16.png">Settings...</button>
-				</p>
+			    <p>
+			        <button id="settingsButton" data-bind="command: ShowSettingsDialogCommand"><img src="settings16x16.png">Settings...</button>
+			    </p>
+                <div data-embedhtml="../SettingProtection/SettingsProtectionButton.html"></div>
 			</div>
 		</div>
 		<div data-bind="if: State() == SyncState.Syncing">

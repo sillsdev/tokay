@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace Knockout.Net
+namespace TokaySharp
 {
     public class GeckoFxInitializer
     {

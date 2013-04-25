@@ -5,9 +5,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Windows.Input;
 
-namespace Knockout.Net
+namespace TokaySharp
 {
 	public class RelayCommand : RelayCommandBase
 	{
