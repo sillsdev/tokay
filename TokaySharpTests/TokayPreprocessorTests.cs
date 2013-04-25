@@ -10,10 +10,11 @@ namespace TokaySharpTests
 		[Test]
 		public void PreprocessFile_NothingToEmbed_ReturnsATempFileDuplicate()
 		{
+
 			var contents = "<html><body></body></html>";
 			using (var tmp = new TempFile(contents))
 			{
-				var resultPath = TokayPreprocessor.PreprocessFile(tmp.Path);
+				var resultPath = TokaySharp.TokayPreprocessor.PreprocessFile(tmp.Path);
 				Assert.AreEqual(contents,File.ReadAllText(resultPath));
 			}
 		}
