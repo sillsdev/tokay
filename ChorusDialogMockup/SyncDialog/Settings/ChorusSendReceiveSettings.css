@@ -54,8 +54,8 @@ BUTTON
 }
 #bottomRightButtonCluster
 {
-	margin-left: 45px;
-	display: inline-block;
+	margin-right: 45px;
+	text-align: right;
 }
 INPUT
 {
