@@ -20,7 +20,7 @@ namespace ChorusDialogMockup
         {
             InitializeComponent();
 
-			_ko = new KOControl(GetObject, FileLocator.GetFileDistributedWithApplication("Settings/ChorusSendReceiveSettings.html"));
+			_ko = new KOControl(GetObject, FileLocator.GetFileDistributedWithApplication("ChorusSendReceiveSettings.html"));
 			Controls.Add(_ko);
 			_ko.Dock = DockStyle.Fill;
 			Model = new ChorusSendReceiveSettingsModel();
