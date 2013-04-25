@@ -1,0 +1,9 @@
+#settingsLink
+{
+	background-image: url('lockOpen48x48.png');
+	background-repeat: no-repeat;
+	padding-left: 50px;
+	height: 48px;
+	display: table-cell;
+	vertical-align: bottom;
+}

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
+using System.Windows.Input;
 using Gecko;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -68,6 +69,8 @@ namespace TokaySharp
 			Application.Idle += Application_Idle;
 			_browser.Dock = DockStyle.Fill;
 			_browser.DisableWmImeSetContext = true;
+			GeckoPreferences.User["security.fileuri.strict_origin_policy"] = false;
+			GeckoPreferences.User["dom.max_script_run_time"] = 0;
 			_browser.JavascriptError += _browser_JavascriptError;
 		}
 

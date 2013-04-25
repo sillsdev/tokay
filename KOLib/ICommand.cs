@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TokaySharp
+﻿namespace System.Windows.Input
 {
 	public interface ICommand
 	{

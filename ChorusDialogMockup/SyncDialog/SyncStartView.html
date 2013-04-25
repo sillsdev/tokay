@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+</head>
+<body>
+	<p>
+		Label this point in project history (Optional):
+		<br/>
+		<input data-bind="value: CommitMessage" />
+	</p>
+	<p>
+		<button class="optionButton" data-bind="command: UseUSBFlashDriveCommand"><img src="Usb32x28.png">USB Flash Drive</button>
+		<br/>
+		<span class="statusLabel" data-bind="text: USBFlashDriveStatusMessage">Lorum Ipsum</span>
+	</p>
+	<p>
+		<button class="optionButton" data-bind="command: UseInternetCommand"><img src="internet29x32.png">Internet</button>
+		<br/>
+		<span class="statusLabel" data-bind="text: InternetStatusMessage"> </span>
+	</p>
+	<p>
+		<button class="optionButton" data-bind="command: UseChorusHubCommand"><img src="chorusHubMedium.png">Chorus Hub</button>
+		<br/>
+		<span class="statusLabel" data-bind="text: ChorusHubStatusMessage"> </span>
+	</p>
+	<p>
+		<button id="settingsButton" data-bind="command: ShowSettingsDialogCommand"><img src="settings16x16.png">Settings...</button>
+	</p>
+	<!--div data-embedhtml="../SettingProtection/SettingsProtectionButton.html"></div-->
+	<div data-bind="template: {name: 'SettingsProtectionButton', templateUrl: '../SettingsProtection', afterRender: loadCss('../SettingsProtection/SettingsProtectionButton.css')}"></div>
+</body>
+</html>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Windows.Forms;
 using HtmlAgilityPack;
 
 namespace TokaySharp
