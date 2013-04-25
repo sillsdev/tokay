@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2010
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{FC92BC19-C70B-4848-A60C-143726991288}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2D139A53-92B5-4C4D-B624-F7F7851926B9} = {2D139A53-92B5-4C4D-B624-F7F7851926B9}

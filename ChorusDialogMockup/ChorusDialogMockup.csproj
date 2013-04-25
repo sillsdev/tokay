@@ -53,8 +53,8 @@
     <Compile Include="ChorusSendReceiveSettingsDialog.Designer.cs">
       <DependentUpon>ChorusSendReceiveSettingsDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChorusSendReceiveSettingsModel.cs" />
-    <Compile Include="SyncDialog\SyncStartViewModel.cs" />
+    <Compile Include="SyncDialog\Settings\ChorusSendReceiveSettingsModel.cs" />
+    <Compile Include="SyncDialog\Start\SyncStartViewModel.cs" />
     <Compile Include="FileLocator.cs" />
     <Compile Include="SyncDialog\SyncDialog.cs">
       <SubType>Form</SubType>
@@ -64,7 +64,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SyncDialog\SyncStatusViewModel.cs" />
+    <Compile Include="SyncDialog\Status\SyncStatusViewModel.cs" />
     <Compile Include="SyncDialog\SyncViewModel.cs" />
     <EmbeddedResource Include="ChorusSendReceiveSettingsDialog.resx">
       <DependentUpon>ChorusSendReceiveSettingsDialog.cs</DependentUpon>
@@ -99,25 +99,29 @@
       <Name>KOLib</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="img\" />
-    <Folder Include="js\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="css\ChorusSendReceiveSettings.css" />
     <Content Include="SettingsProtection\SettingsProtectionButton.css" />
     <Content Include="SettingsProtection\SettingsProtectionButton.html" />
     <Content Include="SettingsProtection\lockClosed48x48.png" />
     <Content Include="SettingsProtection\lockOpen48x48.png" />
-    <Content Include="SyncDialog\chorusHubMedium.png" />
-    <Content Include="SyncDialog\internet29x32.png" />
-    <Content Include="SyncDialog\settings16x16.png" />
-    <Content Include="SyncDialog\SyncStartView.html" />
-    <Content Include="SyncDialog\SyncStatusView.html" />
+    <Content Include="SyncDialog\Settings\chorusHubLarge.png" />
+    <Content Include="SyncDialog\Settings\chorusHubMedium.png" />
+    <Content Include="SyncDialog\Settings\ChorusSendReceiveSettings.css" />
+    <Content Include="SyncDialog\Settings\Committer Person.png" />
+    <Content Include="SyncDialog\Settings\internet29x32.png" />
+    <Content Include="SyncDialog\Settings\internet59x64.png" />
+    <Content Include="SyncDialog\Settings\lockClosed48x48.png" />
+    <Content Include="SyncDialog\Settings\lockOpen48x48.png" />
+    <Content Include="SyncDialog\Start\chorusHubMedium.png" />
+    <Content Include="SyncDialog\Start\internet29x32.png" />
+    <Content Include="SyncDialog\Start\settings16x16.png" />
+    <Content Include="SyncDialog\Start\SyncStartView.html" />
+    <Content Include="SyncDialog\Status\SyncStatusView.html" />
     <Content Include="SyncDialog\SyncView.css" />
     <Content Include="SyncDialog\SyncView.html" />
-    <Content Include="html\ChorusSendReceiveSettings.html" />
-    <Content Include="SyncDialog\Usb32x28.png" />
+    <Content Include="SyncDialog\Settings\ChorusSendReceiveSettings.html" />
+    <Content Include="SyncDialog\Start\Usb32x28.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

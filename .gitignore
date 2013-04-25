@@ -9,4 +9,4 @@ xulrunner.zip
 firefox.tar.bz2
 
 *.ncrunchsolution
-/_ReSharper.TokaySharp
+/_ReSharper*
