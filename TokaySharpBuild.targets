@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<UsingTask TaskName="WebDownload" AssemblyFile="$(MSBuildThisFileDirectory)build/MSBuild.Community.Tasks.dll"/>
+	<UsingTask TaskName="Unzip" AssemblyFile="$(MSBuildThisFileDirectory)build/MSBuild.Community.Tasks.dll"/>
+	<UsingTask TaskName="CpuArchitecture" AssemblyFile="$(MSBuildThisFileDirectory)build/FwBuildTasks.dll"/>
+
+	<PropertyGroup>
+		<XulRunnerVersion>18.0.2</XulRunnerVersion>
+	</PropertyGroup>
+
+	<Target Name="Build" DependsOnTargets="DownloadDependencies">
+		<MSBuild Projects="TokaySharp.sln" Properties="Configuration=Debug"/>
+	</Target>
+
+	<Target Name="DownloadDependencies" DependsOnTargets="DownloadDependencies-Linux;DownloadDependencies-Windows"/>
+
+	<Target Name="DownloadDependencies-Linux" Condition="'$(OS)'=='Unix'">
+		<CpuArchitecture>
+			<Output TaskParameter="Value" PropertyName="arch"/>
+		</CpuArchitecture>
+
+		<!-- We use Firefox on Linux because the Xulrunner package is missing some files -->
+		<WebDownload Condition="!Exists('firefox.tar.bz2')" FileUri="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/$(XulRunnerVersion)/linux-$(arch)/en-US/firefox-$(XulRunnerVersion).tar.bz2"
+			FileName="firefox.tar.bz2"/>
+		<CallTarget Targets="UnzipFirefox"/>
+	</Target>
+
+	<Target Name="UnzipFirefox" Condition="!Exists('lib/xulrunner')">
+		<Exec Command="tar -xvjf firefox.tar.bz2" WorkingDirectory="lib"/>
+		<Exec Command="mv lib/firefox lib/xulrunner"/>
+	</Target>
+
+	<Target Name="DownloadDependencies-Windows" Condition="'$(OS)'!='Unix'">
+		<WebDownload Condition="!Exists('xulrunner.zip')"
+			FileUri="ftp://ftp.mozilla.org/pub/mozilla.org/xulrunner/releases/$(XulRunnerVersion)/runtimes/xulrunner-$(XulRunnerVersion).en-US.win32.zip"
+			FileName="xulrunner.zip"/>
+		<Unzip ZipFileName="xulrunner.zip" TargetDirectory="lib" Condition="!Exists('lib/xulrunner')"/>
+	</Target>
+
+</Project>

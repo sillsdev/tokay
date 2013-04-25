@@ -5,3 +5,5 @@ lib/xulrunner/**
 output/**
 *.suo
 *.user
+xulrunner.zip
+firefox.tar.bz2
