@@ -1,9 +1,7 @@
 */obj/**
 */bin/**
-**.dll
 lib/xulrunner/**
-**.exe
-**.pdb
 **.manifest
 output/**
 *.suo
+*.user
