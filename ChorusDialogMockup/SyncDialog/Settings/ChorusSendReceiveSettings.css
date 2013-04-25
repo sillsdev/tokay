@@ -73,3 +73,6 @@ DIV.ch
 {
 	padding-top: 0.2in;
 }
+td.fullWidth {
+	width: 100%;
+}
