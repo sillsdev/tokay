@@ -13,6 +13,7 @@ namespace ChorusDialogMockup.SyncDialog.Settings
 		private string _internetPassword;
 		private bool _internetEnabled;
 		private bool _chorusHubEnabled;
+		private bool _showPasswordText;
 		private readonly ICommand _okCommand;
 
 		public ChorusSendReceiveSettingsModel()
@@ -67,6 +68,12 @@ namespace ChorusDialogMockup.SyncDialog.Settings
 		{
 			get { return _chorusHubEnabled; }
 			set { Set(() => ChorusHubEnabled, ref _chorusHubEnabled, value); }
+		}
+
+		public bool ShowPasswordText
+		{
+			get { return _showPasswordText; }
+			set { Set(() => ShowPasswordText, ref _showPasswordText, value); }
 		}
 
 		public ICommand OkCommand

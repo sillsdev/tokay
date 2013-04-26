@@ -89,7 +89,8 @@
 							Password
 						</td>
 						<td>
-							<input name="Password" style="width: 95%" data-bind="value: InternetPassword"/>
+							<input name="Password" style="width: 95%" data-bind="visible:ShowPasswordText, value: InternetPassword"/>
+							<input type="password" name="Password" style="width: 95%" data-bind="visible:!ShowPasswordText(), value: InternetPassword"/>
 						</td>
 					</tr>
 					<tr>
@@ -98,7 +99,7 @@
 						<td>
 							<p>
 								<input checked="checked" name="ShowInternetOption" value="Show Internet as Send/Receive option"
-								       type="checkbox" />Show characters
+								       type="checkbox" data-bind="checked: ShowPasswordText"/>Show characters
 							</p>
 						</td>
 					</tr>
