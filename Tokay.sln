@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChorusDialogMockup", "Choru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokayLib", "TokayLib\TokayLib.csproj", "{2D139A53-92B5-4C4D-B624-F7F7851926B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DictionaryEntryMockup", "DictionaryEntryMockup\DictionaryEntryMockup.csproj", "{89AB1310-5F63-401E-BF26-2507B435460C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,16 @@ Global
 		{2D139A53-92B5-4C4D-B624-F7F7851926B9}.Release|Mixed Platforms.Build.0 = Release|x86
 		{2D139A53-92B5-4C4D-B624-F7F7851926B9}.Release|x86.ActiveCfg = Release|x86
 		{2D139A53-92B5-4C4D-B624-F7F7851926B9}.Release|x86.Build.0 = Release|x86
+		{89AB1310-5F63-401E-BF26-2507B435460C}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{89AB1310-5F63-401E-BF26-2507B435460C}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{89AB1310-5F63-401E-BF26-2507B435460C}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{89AB1310-5F63-401E-BF26-2507B435460C}.Debug|x86.ActiveCfg = Debug|x86
+		{89AB1310-5F63-401E-BF26-2507B435460C}.Debug|x86.Build.0 = Debug|x86
+		{89AB1310-5F63-401E-BF26-2507B435460C}.Release|Any CPU.ActiveCfg = Release|x86
+		{89AB1310-5F63-401E-BF26-2507B435460C}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{89AB1310-5F63-401E-BF26-2507B435460C}.Release|Mixed Platforms.Build.0 = Release|x86
+		{89AB1310-5F63-401E-BF26-2507B435460C}.Release|x86.ActiveCfg = Release|x86
+		{89AB1310-5F63-401E-BF26-2507B435460C}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

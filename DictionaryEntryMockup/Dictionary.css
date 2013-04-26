@@ -1,0 +1,16 @@
+BODY
+{
+	margin: 10px 20px;
+	font-family: verdana;
+	font-size: 9pt;
+}
+div.title {
+	text-align: center;
+	font-size: 30pt;
+}
+span.form {
+	font-weight: bold;
+}
+
+span.sense
+{font-style: italic}

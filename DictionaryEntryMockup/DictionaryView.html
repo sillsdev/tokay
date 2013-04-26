@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="Dictionary.css"/>
+	<link rel="stylesheet" type="text/css" href="../../lib/css/base/jquery-ui.min.css"/>
+    <script type="text/javascript" src="../lib/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="../lib/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../lib/knockout-2.2.1.debug.js"></script>
+	<script type="text/javascript" src="../lib/knockout-jqueryui.min.js"></script>
+	<script type="text/javascript" src="../js/tokay.js"></script>
+    <script type='text/javascript'>
+		tokay.addComponentLibrary("Chorus", "..", true);
+        $(function () {
+            ko.applyBindings(tokay.loadViewModel('DictionaryModel'));
+        });
+	</script>
+</head>
+<body>
+	<div class="title">
+		Dictionary of <span data-bind="text: Title"></span>
+	</div>
+			<div data-bind="foreach: Entries">
+				<div>
+					<span class="form" data-bind="text: Form"></span>: 
+					<span class="senses" data-bind="foreach: Senses">
+						<span class="sense" data-bind="text: Gloss"></span>
+					</span>
+				</div>
+			</div>
+</body>
+</html>
