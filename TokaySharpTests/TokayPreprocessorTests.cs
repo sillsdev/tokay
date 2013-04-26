@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using NUnit.Framework;
-using TokaySharp;
+using Tokay;
 
 namespace TokaySharpTests
 {
@@ -14,7 +14,7 @@ namespace TokaySharpTests
 			var contents = "<html><body></body></html>";
 			using (var tmp = new TempFile(contents))
 			{
-				var resultPath = TokaySharp.TokayPreprocessor.PreprocessFile(tmp.Path);
+				var resultPath = Tokay.TokayPreprocessor.PreprocessFile(tmp.Path);
 				Assert.AreEqual(contents,File.ReadAllText(resultPath));
 			}
 		}

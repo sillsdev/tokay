@@ -76,7 +76,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KOLib\KOLib.csproj">
+    <ProjectReference Include="..\TokayLib\TokayLib.csproj">
       <Project>{2d139a53-92b5-4c4d-b624-f7f7851926b9}</Project>
       <Name>KOLib</Name>
     </ProjectReference>

@@ -22,7 +22,7 @@ namespace ChorusDialogMockup.SyncDialog.Start
 
 		public SyncStartViewModel(SyncViewModel syncViewModel)
 		{
-			_simulateDoneCheckingTimer = new Timer { Interval = 2000, Enabled = true };
+			_simulateDoneCheckingTimer = new Timer { Interval = 4000, Enabled = true };
 			_simulateDoneCheckingTimer.Tick += SimulateDoneCheckingTimerTick;
 			_sendReceiveSettings.InternetEnabled = true;
 			_sendReceiveSettings.ChorusHubEnabled = true;

@@ -36,13 +36,14 @@
 	    self.template = loadTemplate(templateId, options);
 	    self.data = {};
 		
-		function loadTemplate(templateId, options) {
+	    function loadTemplate(templateId, options) {
 			if (options.library === undefined)
 				options.library = defaultLibrary;
 			var path = libraries[options.library];
 			path = path + "/" + options.name.replace(new RegExp("[.]", "g"), "/");
 			var htmlPath = path + ".html";
 			var templateResult = "";
+
 			$.ajax({
 				url: htmlPath,
 				success: function(html) {

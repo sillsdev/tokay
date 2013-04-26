@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Windows.Forms;
 using System.Windows.Input;
+using ChorusDialogMockup.PalasoLibrary.SettingsProtection.SettingsProtectionButton;
 using Tokay;
 
 namespace ChorusDialogMockup.SyncDialog.Settings
@@ -15,6 +16,12 @@ namespace ChorusDialogMockup.SyncDialog.Settings
 		private bool _internetEnabled;
 		private bool _chorusHubEnabled;
 		private bool _showPasswordText;
+		private SettingsProtectionButtonViewModel _settingsProtectionButtonViewModel;
+		
+		public ChorusSendReceiveSettingsModel ()
+		{
+			_settingsProtectionButtonViewModel = new SettingsProtectionButtonViewModel();
+		}
 
 		public void Closing(DialogResult result)
 		{
@@ -80,6 +87,12 @@ namespace ChorusDialogMockup.SyncDialog.Settings
 			destination.InternetUrl = InternetUrl;
 			destination.ChorusHubEnabled = ChorusHubEnabled;
 			destination.ShowPasswordText = ShowPasswordText;
+		}
+
+		public SettingsProtectionButtonViewModel SettingsProtectionButtonViewModel
+		{
+			get { return _settingsProtectionButtonViewModel; }
+			set { Set(() => SettingsProtectionButtonViewModel, ref _settingsProtectionButtonViewModel, value); }
 		}
 	}
 }

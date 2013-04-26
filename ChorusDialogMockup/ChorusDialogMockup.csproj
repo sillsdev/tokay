@@ -47,6 +47,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PalasoLibrary\SettingsProtection\SettingsProtectionButton\SettingsProtectionButtonViewModel.cs" />
+    <Compile Include="PalasoLibrary\SettingsProtection\SettingsProtectionDialog\SettingsProtectionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PalasoLibrary\SettingsProtection\SettingsProtectionDialog\SettingsProtectionDialog.Designer.cs">
+      <DependentUpon>SettingsProtectionDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="SyncDialog\Settings\ChorusSendReceiveSettingsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +73,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SyncDialog\Status\SyncStatusViewModel.cs" />
     <Compile Include="SyncDialog\SyncViewModel.cs" />
+    <EmbeddedResource Include="PalasoLibrary\SettingsProtection\SettingsProtectionDialog\SettingsProtectionDialog.resx">
+      <DependentUpon>SettingsProtectionDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SyncDialog\Settings\ChorusSendReceiveSettingsDialog.resx">
       <DependentUpon>ChorusSendReceiveSettingsDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -100,10 +110,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SettingsProtection\SettingsProtectionButton.css" />
-    <Content Include="SettingsProtection\SettingsProtectionButton.html" />
-    <Content Include="SettingsProtection\lockClosed48x48.png" />
-    <Content Include="SettingsProtection\lockOpen48x48.png" />
+    <Content Include="PalasoLibrary\SettingsProtection\SettingsProtectionButton\SettingsProtectionButton.css" />
+    <Content Include="PalasoLibrary\SettingsProtection\SettingsProtectionButton\SettingsProtectionButton.html" />
+    <Content Include="PalasoLibrary\SettingsProtection\SettingsProtectionButton\lockClosed48x48.png" />
+    <Content Include="PalasoLibrary\SettingsProtection\SettingsProtectionButton\lockOpen48x48.png" />
     <Content Include="SyncDialog\Settings\chorusHubLarge.png" />
     <Content Include="SyncDialog\Settings\chorusHubMedium.png" />
     <Content Include="SyncDialog\Settings\ChorusSendReceiveSettings.css" />
@@ -122,6 +132,7 @@
     <Content Include="SyncDialog\Settings\ChorusSendReceiveSettings.html" />
     <Content Include="SyncDialog\Start\Usb32x28.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
