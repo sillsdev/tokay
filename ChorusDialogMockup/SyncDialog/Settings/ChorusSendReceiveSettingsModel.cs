@@ -11,6 +11,8 @@ namespace ChorusDialogMockup.SyncDialog.Settings
 		private string _internetProjectId;
 		private string _internetLogin;
 		private string _internetPassword;
+		private bool _internetEnabled;
+		private bool _chorusHubEnabled;
 		private readonly ICommand _okCommand;
 
 		public ChorusSendReceiveSettingsModel()
@@ -51,6 +53,20 @@ namespace ChorusDialogMockup.SyncDialog.Settings
 		{
 			get { return _userName; }
 			set { Set(() => UserName, ref _userName, value); }
+		}
+
+		// Should we offer the user Internet S/R at all?
+		public bool InternetEnabled
+		{
+			get { return _internetEnabled; }
+			set { Set(() => InternetEnabled, ref _internetEnabled, value); }
+		}
+
+		// Should we offer the user Chorus Hub S/R at all?
+		public bool ChorusHubEnabled
+		{
+			get { return _chorusHubEnabled; }
+			set { Set(() => ChorusHubEnabled, ref _chorusHubEnabled, value); }
 		}
 
 		public ICommand OkCommand

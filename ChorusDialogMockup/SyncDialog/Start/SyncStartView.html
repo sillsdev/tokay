@@ -14,12 +14,12 @@
 		<br/>
 		<span class="statusLabel" data-bind="text: USBFlashDriveStatusMessage">Lorum Ipsum</span>
 	</p>
-	<p>
+	<p data-bind="visible: Settings.InternetEnabled">
 		<button class="optionButton" data-bind="command: UseInternetCommand"><div id="internetImage" class="buttonImage"></div>Internet</button>
 		<br/>
 		<span class="statusLabel" data-bind="text: InternetStatusMessage"> </span>
 	</p>
-	<p>
+	<p data-bind="visible: Settings.ChorusHubEnabled">
 		<button class="optionButton" data-bind="command: UseChorusHubCommand"><div id="chorusHubImage" class="buttonImage"></div>Chorus Hub</button>
 		<br/>
 		<span class="statusLabel" data-bind="text: ChorusHubStatusMessage"> </span>

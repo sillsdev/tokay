@@ -24,6 +24,8 @@ namespace ChorusDialogMockup.SyncDialog.Start
 		{
 			_simulateDoneCheckingTimer = new Timer { Interval = 2000, Enabled = true };
 			_simulateDoneCheckingTimer.Tick += SimulateDoneCheckingTimerTick;
+			_sendReceiveSettings.InternetEnabled = true;
+			_sendReceiveSettings.ChorusHubEnabled = true;
 
 			_useUSBFlashDriveCommand = new RelayCommand(() => syncViewModel.StartSync(), () => UsbAvailable);
 			_useInternetCommand = new RelayCommand(() => syncViewModel.StartSync(), () => InternetAvailable);
@@ -106,5 +108,8 @@ namespace ChorusDialogMockup.SyncDialog.Start
 			get { return _chorusHubStatusMessage; }
 			set { Set(() => ChorusHubStatusMessage, ref _chorusHubStatusMessage, value); }
 		}
+
+		// Allows our HTML to monitor properties of the settings, such as InternetEnabled.
+		public ChorusSendReceiveSettingsModel Settings { get { return _sendReceiveSettings; } }
 	}
 }

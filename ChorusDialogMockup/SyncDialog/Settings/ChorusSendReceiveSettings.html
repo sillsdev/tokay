@@ -49,7 +49,7 @@
 						</td>
 						<td class="fullWidth">
 							<input checked="checked" name="ShowInternetOption" value="Show Internet as Send/Receive option"
-							       type="checkbox" />Show Internet as Send/Receive option
+							       type="checkbox" data-bind="checked:InternetEnabled"/>Show Internet as Send/Receive option
 						</td>
 					</tr>
 					<tr>
@@ -107,7 +107,7 @@
 		</div>
 		<div id="fragment-2">
 			<input checked="checked" name="ShowChorusHubOption" value="Show Chorus Hub as a Send/Receive option"
-			       type="checkbox"/>Show Internet as Send/Receive option
+			       type="checkbox" data-bind="checked: ChorusHubEnabled"/>Show Chorus Hub as Send/Receive option
 			<div class="ch">
 				Chorus Hub is a simple way to Send/Receive on a local network, like an office or
 				home. Better instructions will follow in a future version, but for now, this should
