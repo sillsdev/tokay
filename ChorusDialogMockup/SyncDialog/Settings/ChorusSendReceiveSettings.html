@@ -24,8 +24,8 @@
 					<img id="personIcon" alt="committer" src="Committer%20Person.png">
 				</td>
 				<td>
-					Name to show in change history:<br>
-					<input id="userName" name="UserName" />
+					Name to show in change history:<br/>
+					<input id="userName" name="UserName" data-bind="value: UserName"/>
 				</td>
 			</tr>
 		</tbody>
@@ -63,7 +63,7 @@
 							URL
 						</td>
 						<td>
-							<input name="URL" style="width: 95%" />
+							<input name="URL" style="width: 95%" data-bind="value: InternetUrl"/>
 						</td>
 					</tr>
 					<tr>
@@ -71,7 +71,7 @@
 							Project ID
 						</td>
 						<td>
-							<input name="ProjectId" style="width: 95%;" />
+							<input name="ProjectId" style="width: 95%;" data-bind="value: InternetProjectId"/>
 						</td>
 					</tr>
 					<tr>
@@ -79,7 +79,7 @@
 							Login
 						</td>
 						<td>
-							<input name="Login" style="width: 95%" />
+							<input name="Login" style="width: 95%" data-bind="value: InternetLogin"/>
 						</td>
 					</tr>
 					<tr>
@@ -87,7 +87,7 @@
 							Password
 						</td>
 						<td>
-							<input name="Password" style="width: 95%"/>
+							<input name="Password" style="width: 95%" data-bind="value: InternetPassword"/>
 						</td>
 					</tr>
 					<tr>
@@ -133,7 +133,7 @@
 
 
 	    <div id="bottomRightButtonCluster">
-	        <button class="defaultButton" value="OK" type="button"style="text-align: center">OK</button>
+	        <button class="defaultButton" value="OK" type="button"style="text-align: center" data-bind="command: OkCommand">OK</button>
 	        <button value="Cancel" type="button"style="text-align: center">Cancel</button>
 	        <button value="Help" type="button"style="text-align: center">Help</button>
         </div>

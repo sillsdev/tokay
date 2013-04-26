@@ -60,6 +60,7 @@ namespace ChorusDialogMockup.SyncDialog
 		private object LaunchSettingsDialog()
 		{
 			var chorusSendReceiveSettingsDialog = new ChorusSendReceiveSettingsDialog {Model = _sendReceiveSettings};
+			_sendReceiveSettings.SetView(chorusSendReceiveSettingsDialog);
 			chorusSendReceiveSettingsDialog.Show();
 			return null; // what object is it supposed to return??
 		}

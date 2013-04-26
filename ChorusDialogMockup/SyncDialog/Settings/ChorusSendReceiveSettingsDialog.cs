@@ -10,7 +10,7 @@ using TokaySharp;
 
 namespace ChorusDialogMockup
 {
-	public partial class ChorusSendReceiveSettingsDialog : Form
+	public partial class ChorusSendReceiveSettingsDialog : Form, IChorusSendReceiveSettingsView
 	{
 		private readonly KOControl _ko;
 
