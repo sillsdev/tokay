@@ -4,6 +4,7 @@ using Tokay;
 
 namespace ChorusDialogMockup.SyncDialog
 {
+	// The possible states of the main Chorus SyncView: displaying SyncStartView.html or SyncStatusView.html
 	public enum SyncState
 	{
 		Start,
@@ -22,6 +23,8 @@ namespace ChorusDialogMockup.SyncDialog
 			_status = new SyncStatusViewModel();
 		}
 
+		// Monitored by data binding in the top-level SyncView, controls which of two templates
+		// occupies the whole window.
 		public SyncState State
 		{
 			get { return _state; }
