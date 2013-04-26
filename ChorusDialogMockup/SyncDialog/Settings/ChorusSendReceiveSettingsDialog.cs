@@ -6,8 +6,13 @@ namespace ChorusDialogMockup.SyncDialog.Settings
 	public partial class ChorusSendReceiveSettingsDialog : Form
 	{
 		private readonly TokayControl _tokay;
+		private ModelSandboxer<ChorusSendReceiveSettingsModel> m_modelSandboxer;
 
-		public ChorusSendReceiveSettingsModel Model { get; set; }
+		public ChorusSendReceiveSettingsModel Model
+		{
+			get { return m_modelSandboxer.WorkingModel; }
+			set { m_modelSandboxer = new ModelSandboxer<ChorusSendReceiveSettingsModel>(value); }
+		}
 
 		public ChorusSendReceiveSettingsDialog()
         {
@@ -23,6 +28,10 @@ namespace ChorusDialogMockup.SyncDialog.Settings
 		private void _tokay_CloseDialogRequested(object sender, CloseDialogRequestedEventArgs e)
 		{
 			DialogResult = e.DialogResult;
+			// Review: should this logic be in the {View}Model rather than here?
+			if (DialogResult == DialogResult.OK)
+				m_modelSandboxer.CopyBackToOriginal();
+			m_modelSandboxer.OriginalModel.Closing(DialogResult);
 			Close();
 		}
 

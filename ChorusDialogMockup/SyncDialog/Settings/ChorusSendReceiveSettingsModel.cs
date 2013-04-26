@@ -1,10 +1,11 @@
 ﻿using System.Diagnostics;
+using System.Windows.Forms;
 using System.Windows.Input;
 using Tokay;
 
 namespace ChorusDialogMockup.SyncDialog.Settings
 {
-	public class ChorusSendReceiveSettingsModel : ObservableObject
+	public class ChorusSendReceiveSettingsModel : ObservableObject, ICopyDataTo<ChorusSendReceiveSettingsModel>
 	{
 		private string _userName;
 		private string _internetUrl;
@@ -14,16 +15,10 @@ namespace ChorusDialogMockup.SyncDialog.Settings
 		private bool _internetEnabled;
 		private bool _chorusHubEnabled;
 		private bool _showPasswordText;
-		private readonly ICommand _okCommand;
 
-		public ChorusSendReceiveSettingsModel()
+		public void Closing(DialogResult result)
 		{
-			_okCommand = new RelayCommand(() => OkClicked());
-
-		}
-
-		private void OkClicked()
-		{
+			Debug.WriteLine("Closing settings dialog with result " + result);
 			Debug.WriteLine("User name is: " + UserName);
 			Debug.WriteLine("Internet settings are Url: {0}; Project {1}; Login {2}; Passsword {3}",
 				InternetUrl, InternetProjectId, InternetLogin, InternetPassword);
@@ -76,9 +71,15 @@ namespace ChorusDialogMockup.SyncDialog.Settings
 			set { Set(() => ShowPasswordText, ref _showPasswordText, value); }
 		}
 
-		public ICommand OkCommand
+		public void CopyTo(ChorusSendReceiveSettingsModel destination)
 		{
-			get { return _okCommand; }
+			destination.InternetEnabled = InternetEnabled;
+			destination.InternetLogin = InternetLogin;
+			destination.InternetPassword = InternetPassword;
+			destination.InternetProjectId = InternetProjectId;
+			destination.InternetUrl = InternetUrl;
+			destination.ChorusHubEnabled = ChorusHubEnabled;
+			destination.ShowPasswordText = ShowPasswordText;
 		}
 	}
 }

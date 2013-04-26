@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GeckoFxInitializer.cs" />
+    <Compile Include="ModelSandboxer.cs" />
     <Compile Include="TokayControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

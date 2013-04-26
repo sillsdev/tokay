@@ -132,7 +132,7 @@
 	    <div data-bind="template: {name: 'SettingsProtection.SettingsProtectionButton'}"></div>
 
 	    <div id="bottomRightButtonCluster">
-	        <button class="dialogButton" value="OK" type="button"style=" text-align: center" data-bind="command: OkCommand, afterExecute: function() {tokay.closeDialog('OK')}">OK</button>
+	        <button class="dialogButton" value="OK" type="button"style=" text-align: center" onclick="tokay.closeDialog('OK')">OK</button>
 	        <button class="dialogButton" value="Cancel" type="button"style=" text-align: center" onclick="tokay.closeDialog('Cancel')">Cancel</button>
 	        <button class="dialogButton" value="Help" type="button"style=" text-align: center">Help</button>
         </div>
