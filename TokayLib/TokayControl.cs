@@ -31,7 +31,7 @@ namespace Tokay
 		}
 	}
 
-	public class KOControl : UserControl
+	public class TokayControl : UserControl
 	{
 		public event EventHandler ViewLoaded;
 		public event EventHandler<CloseDialogRequestedEventArgs> CloseDialogRequested; 
@@ -48,7 +48,7 @@ namespace Tokay
 		private bool _loaded;
 		private readonly HashSet<Type> _enumerations; 
 
-		public KOControl(Func<string, object> getObject, string pathToStartupViewHtml)
+		public TokayControl(Func<string, object> getObject, string pathToStartupViewHtml)
 		{
 			GeckoFxInitializer.SetUpXulRunner();
 

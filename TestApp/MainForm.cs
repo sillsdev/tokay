@@ -5,16 +5,16 @@ namespace TestApp
 {
 	public partial class MainForm : Form
 	{
-		private readonly KOControl _ko;
+		private readonly TokayControl _tokay;
 		private readonly MainViewModel _mainViewModel;
 
 		public MainForm()
 		{
 			InitializeComponent();
 
-			_ko = new KOControl(GetObject, FileLocator.GetFileDistributedWithApplication("MainView.html"));
-			Controls.Add(_ko);
-			_ko.Dock = DockStyle.Fill;
+			_tokay = new TokayControl(GetObject, FileLocator.GetFileDistributedWithApplication("MainView.html"));
+			Controls.Add(_tokay);
+			_tokay.Dock = DockStyle.Fill;
 			_mainViewModel = new MainViewModel();
 		}
 

@@ -5,21 +5,21 @@ namespace ChorusDialogMockup.SyncDialog
 {
     public partial class SyncDialog : Form
     {
-		private readonly KOControl _ko;
+		private readonly TokayControl _tokay;
 	    private readonly SyncViewModel _syncViewModel;
 
 	    public SyncDialog()
         {
             InitializeComponent();
 
-			_ko = new KOControl(GetObject, FileLocator.GetFileDistributedWithApplication("SyncView.html"));
-			Controls.Add(_ko);
-			_ko.Dock = DockStyle.Fill;
+			_tokay = new TokayControl(GetObject, FileLocator.GetFileDistributedWithApplication("SyncView.html"));
+			Controls.Add(_tokay);
+			_tokay.Dock = DockStyle.Fill;
 			_syncViewModel = new SyncViewModel();
-			_ko.CloseDialogRequested += _ko_CloseDialogRequested;
+			_tokay.CloseDialogRequested += _tokay_CloseDialogRequested;
 		}
 
-		private void _ko_CloseDialogRequested(object sender, CloseDialogRequestedEventArgs e)
+		private void _tokay_CloseDialogRequested(object sender, CloseDialogRequestedEventArgs e)
 		{
 			DialogResult = e.DialogResult;
 			Close();
