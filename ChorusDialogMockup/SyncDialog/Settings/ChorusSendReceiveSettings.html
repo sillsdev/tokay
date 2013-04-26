@@ -8,10 +8,12 @@
     <script type="text/javascript" src="../../../lib/jquery-1.9.1.js"></script>
 	<script type="text/javascript" src="../../../lib/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="../../../lib/knockout-2.2.1.debug.js"></script>
-	<script type="text/javascript" src="../../../js/knockout.net.js"></script>
+	<script type="text/javascript" src="../../../lib/knockout-jqueryui.min.js"></script>
+	<script type="text/javascript" src="../../../js/tokay.js"></script>
 	<script type='text/javascript'>
+		tokay.addComponentLibrary("Chorus", "../..", true);
 		$(function () {
-			ko.applyBindings(ko.net.loadViewModel('ChorusSendReceiveSettingsModel'));
+			ko.applyBindings(tokay.loadViewModel('ChorusSendReceiveSettingsModel'));
 		});
 	</script>
 	<title>SendReceiveSettings</title>
@@ -31,7 +33,7 @@
 		</tbody>
 	</table>
 	<br>
-	<div id="tabs">
+	<div data-bind="tabs: {}">
 		<ul>
 			<li><a href="#fragment-1"><span>Internet</span></a></li>
 			<li><a href="#fragment-2"><span>Chorus Hub</span></a></li>
@@ -126,20 +128,13 @@
 		</div>
 	</div>
 	<div id="bottomButtonRow">
-	    <!--<img alt="lockOpen" src="lockOpen48x48.png"/><a href="somewhere">Settings Protection...</a>-->
-	    <!--
-	    
-            TODO: can't figure out what the path should be    <div data-bind="template: { name: 'SettingsProtectionButton', templateUrl: '../SettingsProtection', afterRender: loadCss('../SettingsProtection/SettingsProtectionButton.css') }"></div>-->
-
+	    <div data-bind="template: {name: 'SettingsProtection.SettingsProtectionButton'}"></div>
 
 	    <div id="bottomRightButtonCluster">
-	        <button class="defaultButton" value="OK" type="button"style="text-align: center" data-bind="command: OkCommand">OK</button>
-	        <button value="Cancel" type="button"style="text-align: center">Cancel</button>
-	        <button value="Help" type="button"style="text-align: center">Help</button>
+	        <button class="dialogButton" value="OK" type="button"style=" text-align: center" data-bind="command: OkCommand, afterExecute: function() {tokay.closeDialog('OK')}">OK</button>
+	        <button class="dialogButton" value="Cancel" type="button"style=" text-align: center" onclick="tokay.closeDialog('Cancel')">Cancel</button>
+	        <button class="dialogButton" value="Help" type="button"style=" text-align: center">Help</button>
         </div>
 	</div>
-	<script type="text/javascript">
-		$("#tabs").tabs();
-	</script>
 </body>
 </html>

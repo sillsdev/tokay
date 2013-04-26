@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Windows.Input;
 
-namespace TokaySharp
+namespace Tokay
 {
 	public class RelayCommand : RelayCommandBase
 	{

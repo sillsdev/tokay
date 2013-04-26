@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using TokaySharp;
+using Tokay;
 
-namespace ChorusDialogMockup.SyncDialog
+namespace ChorusDialogMockup.SyncDialog.Status
 {
 	public class SyncStatusViewModel : ObservableObject
 	{

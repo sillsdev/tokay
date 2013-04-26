@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace TokaySharp
+namespace Tokay
 {
     public class WeakEvent<TDelegate> where TDelegate : class
     {

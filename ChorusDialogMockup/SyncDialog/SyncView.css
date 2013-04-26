@@ -5,40 +5,9 @@ BODY
 	font-family: verdana;
 	font-size: 9pt;
 }
-.statusLabel
-{
-	color: #8C8484;
-}
-BUTTON IMG
-{
-	vertical-align: middle;
-	padding-right: 12px;
-}
-.optionButton
-{
-	line-height: 42px;
-	width: 175px;
-	text-align: left;
-}
-#settingsButton
-{
-	/*+placement:float-right 17px -7px;*/
-	float: right;
-	position: relative;
-	left: 17px;
-	top: -7px;
-	background: transparent;
-	border: 1px none #000000;
-	width: 113px;
-}
 
 .closeButton
 {
 	width: 100px;
 	height: 40px;
-}
-
-INPUT
-{
-	width: 100%;
 }

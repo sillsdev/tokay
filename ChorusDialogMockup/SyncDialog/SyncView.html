@@ -9,28 +9,20 @@
 	<script type="text/javascript" src="../../lib/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="../../lib/knockout-2.2.1.debug.js"></script>
 	<script type="text/javascript" src="../../lib/knockout-jqueryui.min.js"></script>
-	<script type="text/javascript" src="../../lib/koExternalTemplateEngine_all.min.js"></script>
-	<script type="text/javascript" src="../../js/knockout.net.js"></script>
+	<script type="text/javascript" src="../../js/tokay.js"></script>
     <script type='text/javascript'>
+		tokay.addComponentLibrary("Chorus", "..", true);
         $(function () {
-            ko.applyBindings(ko.net.loadViewModel('SyncViewModel'));
+            ko.applyBindings(tokay.loadViewModel('SyncViewModel'));
         });
-		
-		function loadCss(path) {
-			var link = document.createElement("link");
-			link.type = "text/css";
-			link.rel = "stylesheet";
-			link.href = path;
-			document.getElementsByTagName("head")[0].appendChild(link);
-		}
 	</script>
 </head>
 <body>
-	<div data-bind="if: State() == SyncState.Start">
-		<div data-bind="template: {name: 'Start/SyncStartView', data: Start}"></div>
+	<div data-bind="if: State() === SyncState.Start">
+		<div data-bind="template: {name: 'SyncDialog.Start.SyncStartView', data: Start}"></div>
 	</div>
-	<div data-bind="if: State() == SyncState.Syncing">
-		<div data-bind="template: {name: 'Status/SyncStatusView', data: Status}"></div>
+	<div data-bind="if: State() === SyncState.Syncing">
+		<div data-bind="template: {name: 'SyncDialog.Status.SyncStatusView', data: Status}"></div>
 	</div>
 </body>
 </html>

@@ -5,20 +5,10 @@ BODY
 	font-family: verdana;
 	font-size: 9pt;
 }
-#tabs
-{
-	height: 397px;
-}
 #bottomButtonRow
 {
-	/*+placement:anchor-bottom-left 0px 0px;*/
-	position: absolute;
-	left: 0px;
-	bottom: 0px;
 	display: inline-block;
 	width: 100%;
-	margin-bottom: 16px;
-	margin-left: 28px;
 }
 TD
 {
@@ -33,20 +23,10 @@ TD
 	margin-right: 21px;
 	margin-top: 11px;
 }
-BUTTON IMG
-{
-	vertical-align: middle;
-}
-BUTTON
+.dialogButton
 {
 	font-family: Verdana;
 	width: 82px;
-	text-align: left;
-	height: 24px;
-	padding-top: 0px;
-	padding-bottom: 0px;
-	margin-bottom: 0px;
-	margin-top: 7px;
 }
 .serverChooser
 {
@@ -54,11 +34,7 @@ BUTTON
 }
 #bottomRightButtonCluster
 {
-	margin-right: 45px;
 	text-align: right;
-}
-INPUT
-{
 }
 #userName
 {

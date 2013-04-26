@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TokaySharp
+namespace Tokay
 {
 	public class SimpleMonitor : IDisposable
 	{

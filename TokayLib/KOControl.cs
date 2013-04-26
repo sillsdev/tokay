@@ -14,7 +14,7 @@ using Gecko;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace TokaySharp
+namespace Tokay
 {
 	public class CloseDialogRequestedEventArgs : EventArgs
 	{
@@ -342,7 +342,7 @@ namespace TokaySharp
 		private void RemoveObject(string id)
 		{
 			_idsToObjects.Remove(id);
-			ExecuteScript(string.Format("ko.net._removeObject('{0}')", id));
+			ExecuteScript(string.Format("tokay._removeObject('{0}')", id));
 		}
 
 		private void GetObject(string vmName)
@@ -350,7 +350,7 @@ namespace TokaySharp
 			object vm = _getObject(vmName);
 
 			JObject jobj = LoadObject(vm);
-			ExecuteScript(string.Format("ko.net._loadedID = {0}", (string) jobj["id"]));
+			ExecuteScript(string.Format("tokay._loadedID = {0}", (string) jobj["id"]));
 		}
 
 		private JObject LoadObject(object obj)
@@ -406,7 +406,7 @@ namespace TokaySharp
 								var enumObj = new JObject();
 								foreach (object enumValue in Enum.GetValues(prop.PropertyType))
 									enumObj.Add(new JProperty(Enum.GetName(prop.PropertyType, enumValue), enumValue));
-								ExecuteScript(string.Format("ko.net._addEnumeration('{0}', '{1}')", prop.PropertyType.Name, enumObj.ToString(Formatting.None)));
+								ExecuteScript(string.Format("tokay._addEnumeration('{0}', '{1}')", prop.PropertyType.Name, enumObj.ToString(Formatting.None)));
 								_enumerations.Add(prop.PropertyType);
 							}
 
@@ -421,7 +421,7 @@ namespace TokaySharp
 					}
 				}
 
-				ExecuteScript(string.Format("ko.net._addObject('{0}')", jobj.ToString(Formatting.None)));
+				ExecuteScript(string.Format("tokay._addObject('{0}')", jobj.ToString(Formatting.None)));
 			}
 
 			return new JObject(new JProperty("id", od.ID));
@@ -452,7 +452,7 @@ namespace TokaySharp
 					var jobj = new JObject(
 						new JProperty("id", od.ID),
 						new JProperty("items", new JArray(enumerable.Cast<object>().Select(GetJsonValue))));
-					ExecuteScript(string.Format("ko.net._updateCollection('{0}')", jobj.ToString(Formatting.None)));
+					ExecuteScript(string.Format("tokay._updateCollection('{0}')", jobj.ToString(Formatting.None)));
 				}
 			}
 		}
@@ -476,7 +476,7 @@ namespace TokaySharp
 							new JObject(
 								new JProperty("name", prop.Name),
 								new JProperty("value", GetJsonValue(val))))));
-					ExecuteScript(string.Format("ko.net._updateObject('{0}')", jobj.ToString(Formatting.None)));
+					ExecuteScript(string.Format("tokay._updateObject('{0}')", jobj.ToString(Formatting.None)));
 				}
 			}
 		}
@@ -517,7 +517,7 @@ namespace TokaySharp
 						new JObject(
 							new JProperty("name", string.Format("CanExecute{0}", cmdID)),
 							new JProperty("value", cmd.CanExecute(ctxt))))));
-				ExecuteScript(string.Format("ko.net._updateObject('{0}')", jobj.ToString(Formatting.None)));
+				ExecuteScript(string.Format("tokay._updateObject('{0}')", jobj.ToString(Formatting.None)));
 			}
 		}
 

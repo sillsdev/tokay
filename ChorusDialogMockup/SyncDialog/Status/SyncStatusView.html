@@ -7,17 +7,17 @@
 	<table width="100%" border="0">
 		<tr>
 			<td width="48" height="48">
-				<img data-bind="visible: Progress() == 100" src="successIcon.png" />
+				<img data-bind="visible: Progress() === 100" src="successIcon.png" />
 			</td>
 			<td>
 				<div style="width: 275px; height: 10px;" data-bind="progressbar: {value: Progress}"></div>
 			</td>
 			<td align="right">
-				<div data-bind="if: Progress() != 100">
-					<button class="closeButton" onclick="ko.net.closeDialog('Cancel')">Cancel</button>
+				<div data-bind="if: Progress() !== 100">
+					<button class="closeButton" onclick="tokay.closeDialog('Cancel')">Cancel</button>
 				</div>
-				<div data-bind="if: Progress() == 100">
-					<button class="closeButton" onclick="ko.net.closeDialog('OK')">Close</button>
+				<div data-bind="if: Progress() === 100">
+					<button class="closeButton" onclick="tokay.closeDialog('OK')">Close</button>
 				</div>
 			</td>
 		</tr>
@@ -27,7 +27,7 @@
 					<ul>
 						<li><a href="#fragment-1"><span>Log</span></a></li>
 					</ul>
-					<div id="fragment-1" style="height: 210px;">
+					<div id="fragment-1" style="height: 175px;">
 					</div>
 				</div>
 			</td>

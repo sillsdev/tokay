@@ -1,4 +1,6 @@
-﻿using TokaySharp;
+﻿using ChorusDialogMockup.SyncDialog.Start;
+using ChorusDialogMockup.SyncDialog.Status;
+using Tokay;
 
 namespace ChorusDialogMockup.SyncDialog
 {

@@ -4,10 +4,10 @@
 	<head>
 		<script type="text/javascript" src="../lib/jquery-1.9.1.js"></script>
 		<script type="text/javascript" src="../lib/knockout-2.2.1.debug.js"></script>
-		<script type="text/javascript" src="../js/knockout.net.js"></script>
+		<script type="text/javascript" src="../js/tokay.js"></script>
 		<script type='text/javascript'>
 			$(function() {
-				ko.applyBindings(ko.net.loadViewModel('Main'));
+				ko.applyBindings(tokay.loadViewModel('Main'));
 			});
 			
 			function convertTypeToColor(type) {

@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace TokaySharp
+namespace Tokay
 {
     public class GeckoFxInitializer
     {

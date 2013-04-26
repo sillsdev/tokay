@@ -1,9 +1,8 @@
 ﻿using System;
 using System.IO;
-
 using HtmlAgilityPack;
 
-namespace TokaySharp
+namespace Tokay
 {
 	/// <summary>
 	/// NOTE: we aren't using this at the moment, and may never

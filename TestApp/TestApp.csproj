@@ -11,8 +11,7 @@
     <RootNamespace>TestApp</RootNamespace>
     <AssemblyName>TestApp</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -46,6 +45,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\geckofx18\Geckofx-Winforms-18.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -95,13 +95,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KOLib\KOLib.csproj">
-      <Project>{2D139A53-92B5-4C4D-B624-F7F7851926B9}</Project>
-      <Name>KOLib</Name>
-    </ProjectReference>
+    <Content Include="MainView.html" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MainView.html" />
+    <ProjectReference Include="..\TokayLib\TokayLib.csproj">
+      <Project>{2D139A53-92B5-4C4D-B624-F7F7851926B9}</Project>
+      <Name>TokayLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -4,7 +4,7 @@ using System.IO;
 using System.Threading;
 using System.Xml;
 
-namespace TokaySharp
+namespace Tokay
 {
     public class TempLiftFile : TempFile
     {

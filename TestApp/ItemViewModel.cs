@@ -1,4 +1,4 @@
-﻿using TokaySharp;
+﻿using Tokay;
 
 namespace TestApp
 {

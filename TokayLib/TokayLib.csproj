@@ -8,11 +8,10 @@
     <ProjectGuid>{2D139A53-92B5-4C4D-B624-F7F7851926B9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TokaySharp</RootNamespace>
-    <AssemblyName>Knockout.Net</AssemblyName>
+    <RootNamespace>Tokay</RootNamespace>
+    <AssemblyName>Tokay</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -79,6 +78,7 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\lib\Json45r11\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -90,7 +90,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ICommand.cs" />
     <Compile Include="GeckoFxInitializer.cs" />
     <Compile Include="KOControl.cs">
       <SubType>UserControl</SubType>

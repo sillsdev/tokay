@@ -9,7 +9,7 @@
 	</PropertyGroup>
 
 	<Target Name="Build" DependsOnTargets="DownloadDependencies">
-		<MSBuild Projects="TokaySharp.sln" Properties="Configuration=Debug"/>
+		<MSBuild Projects="Tokay.sln" Properties="Configuration=Debug"/>
 	</Target>
 
 	<Target Name="DownloadDependencies" DependsOnTargets="DownloadDependencies-Linux;DownloadDependencies-Windows"/>

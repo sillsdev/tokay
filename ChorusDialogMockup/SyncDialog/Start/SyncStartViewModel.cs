@@ -1,9 +1,9 @@
-﻿using System.Diagnostics;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using System.Windows.Input;
-using TokaySharp;
+using ChorusDialogMockup.SyncDialog.Settings;
+using Tokay;
 
-namespace ChorusDialogMockup.SyncDialog
+namespace ChorusDialogMockup.SyncDialog.Start
 {
 	public class SyncStartViewModel : ObservableObject
 	{
@@ -57,12 +57,10 @@ namespace ChorusDialogMockup.SyncDialog
 			InternetAvailable = true;
 		}
 
-		private object LaunchSettingsDialog()
+		private void LaunchSettingsDialog()
 		{
 			var chorusSendReceiveSettingsDialog = new ChorusSendReceiveSettingsDialog {Model = _sendReceiveSettings};
-			_sendReceiveSettings.SetView(chorusSendReceiveSettingsDialog);
 			chorusSendReceiveSettingsDialog.Show();
-			return null; // what object is it supposed to return??
 		}
 
 		public string CommitMessage

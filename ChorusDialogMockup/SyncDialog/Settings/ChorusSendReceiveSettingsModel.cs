@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
+﻿using System.Diagnostics;
 using System.Windows.Input;
-using TokaySharp;
+using Tokay;
 
-namespace ChorusDialogMockup
+namespace ChorusDialogMockup.SyncDialog.Settings
 {
 	public class ChorusSendReceiveSettingsModel : ObservableObject
 	{
@@ -16,7 +12,6 @@ namespace ChorusDialogMockup
 		private string _internetLogin;
 		private string _internetPassword;
 		private readonly ICommand _okCommand;
-		private IChorusSendReceiveSettingsView _view;
 
 		public ChorusSendReceiveSettingsModel()
 		{
@@ -24,18 +19,11 @@ namespace ChorusDialogMockup
 
 		}
 
-		public void SetView(IChorusSendReceiveSettingsView view)
-		{
-			_view = view;
-		}
-		private object OkClicked()
+		private void OkClicked()
 		{
 			Debug.WriteLine("User name is: " + UserName);
 			Debug.WriteLine("Internet settings are Url: {0}; Project {1}; Login {2}; Passsword {3}",
 				InternetUrl, InternetProjectId, InternetLogin, InternetPassword);
-			if (_view != null)
-				_view.Close();
-			return null;
 		}
 
 		public string InternetUrl
@@ -69,14 +57,5 @@ namespace ChorusDialogMockup
 		{
 			get { return _okCommand; }
 		}
-	}
-
-	/// <summary>
-	/// Interface implemented for real by the actual dialog, and potentially also by test double.
-	/// Defines what the model knows about the dialog directly.
-	/// </summary>
-	public interface IChorusSendReceiveSettingsView
-	{
-		void Close();
 	}
 }

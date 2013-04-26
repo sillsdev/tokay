@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-using TokaySharp;
+using Tokay;
 
 namespace ChorusDialogMockup.SyncDialog
 {

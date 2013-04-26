@@ -1,0 +1,44 @@
+.statusLabel
+{
+	color: #8C8484;
+}
+.optionButton
+{
+	line-height: 42px;
+	width: 175px;
+	text-align: left;
+}
+.buttonImage
+{
+	vertical-align: middle;
+	display: inline-block;
+	background-repeat: no-repeat;
+	width: 32px;
+	height: 32px;
+	padding-right: 12px;
+}
+#commitMessageInput
+{
+	width: 100%;
+}
+#usbImage
+{
+	background-image: url('Usb32x28.png');
+}
+#internetImage
+{
+	background-image: url('internet29x32.png');
+}
+#chorusHubImage
+{
+	background-image: url('chorusHubMedium.png');
+}
+#settingsButton
+{
+	background-color: transparent;
+	background-image: url('settings16x16.png');
+	background-repeat: no-repeat;
+	padding-left: 18px;
+	border: 1px none #000000;
+	float: right;
+}
