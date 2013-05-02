@@ -8,9 +8,11 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Windows.Input;
 using Gecko;
+using Gecko.Interop;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -46,13 +48,20 @@ namespace Tokay
 		private readonly Func<string, object> _getObject;
 		private string _currentViewHtmlPath;
 		private bool _loaded;
-		private readonly HashSet<Type> _enumerations; 
+		private readonly HashSet<Type> _enumerations;
 
 		public TokayControl(Func<string, object> getObject, string pathToStartupViewHtml)
 		{
 			GeckoFxInitializer.SetUpXulRunner();
+			GeckoPreferences.User["security.fileuri.strict_origin_policy"] = false;
+			GeckoPreferences.User["dom.max_script_run_time"] = 0;
+			GeckoPreferences.User["extensions.blocklist.enabled"] = false;
+			GeckoPreferences.User["places.history.enabled"] = false;
+			GeckoPreferences.User["network.http.use-cache"] = false;
+			GeckoPreferences.User["gfx.font_rendering.graphite.enabled"] = true;
+			//GeckoPreferences.User["network.cookie.cookieBehavior"] = 2;
 
-            if(!File.Exists(pathToStartupViewHtml))
+            if (!File.Exists(pathToStartupViewHtml))
                 throw new ApplicationException(pathToStartupViewHtml + " does not exist");
 			_getObject = getObject;
 			_currentViewHtmlPath = pathToStartupViewHtml;
@@ -69,9 +78,77 @@ namespace Tokay
 			Application.Idle += Application_Idle;
 			_browser.Dock = DockStyle.Fill;
 			_browser.DisableWmImeSetContext = true;
-			GeckoPreferences.User["security.fileuri.strict_origin_policy"] = false;
-			GeckoPreferences.User["dom.max_script_run_time"] = 0;
+			_browser.DomClick += _browser_DomClick;
+#if DEBUG
+			_browser.EnableJavascriptDebugger();
 			_browser.JavascriptError += _browser_JavascriptError;
+			_browser.ShowContextMenu += _browser_ShowContextMenu;
+#endif
+		}
+
+#if DEBUG
+		private void _browser_JavascriptError(object sender, JavascriptErrorEventArgs error)
+		{
+			if (error.Filename == "chrome://tinyjsd/content/tinyjsd-main.js")
+				return;
+
+			var msg = string.Format("There was a JScript error in {0} at line {1}: {2}",
+										error.Filename, error.Line, error.Message);
+
+			if (msg.Contains("$ is not defined"))
+			{
+				msg += Environment.NewLine + Environment.NewLine + "Make sure jquery is properly referenced";
+			}
+		
+			MessageBox.Show(msg, "Javascript Error", MessageBoxButtons.OK);
+		}
+
+		private void _browser_ShowContextMenu(object sender, GeckoContextMenuEventArgs e)
+		{
+			if (e.ContextMenu.MenuItems.Count > 0)
+				e.ContextMenu.MenuItems.Add("-");
+			bool debuggerPresent = true;
+			try
+			{
+				Xpcom.GetService<nsISupports>("@mozilla.org/network/protocol;1?name=tinyjsd");
+			}
+			catch (COMException)
+			{
+				debuggerPresent = false;
+			}
+
+			e.ContextMenu.MenuItems.Add(new MenuItem("Debug Javascript", Debug_Click) {Enabled = debuggerPresent});
+			e.ContextMenu.MenuItems.Add(new MenuItem("Inspect DOM", Inspect_Click));
+		}
+
+		private void Debug_Click(object sender, EventArgs eventArgs)
+		{
+			var appShellService = new ComPtr<nsIAppShellService>(Xpcom.GetService<nsIAppShellService>(Contracts.AppShellService));
+			appShellService.Instance.CreateHiddenWindow();
+			nsIDOMWindow domWin = appShellService.Instance.GetHiddenDOMWindowAttribute();
+			domWin.Open(new nsAString("chrome://tinyJsd/content/tinyjsd-main.xul"), new nsAString("tinyJsd:mainWindow"), new nsAString("chrome,resizable"));
+		}
+
+		private void Inspect_Click(object sender, EventArgs eventArgs)
+		{
+            string fireBugPath = Path.Combine(GeckoFxInitializer.DirectoryOfApplicationOrSolution, "lib", "firebug-lite");
+            var scriptUri = new Uri(Path.Combine(fireBugPath, "build", "firebug-lite.js"));
+            ExecuteScript(string.Format(@"
+					if (document.getElementById('FirebugLite')) {{
+						Firebug.chrome.toggle(true, true);
+					}} else {{ 
+						var E = document.createElement('script');
+						E.setAttribute('id', 'FirebugLite');
+						E.setAttribute('src', '{0}' + '#startInNewWindow=true, showIconWhenHidden=false');
+						E.setAttribute('FirebugLite', '4');
+						(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(E);
+					}}", scriptUri));
+		}
+#endif
+
+		private void _browser_DomClick(object sender, DomEventArgs e)
+		{
+			_browser.WebBrowserFocus.Activate();
 		}
 
 		private void _browser_DocumentCompleted(object sender, EventArgs e)
@@ -103,19 +180,6 @@ namespace Tokay
 			}
 		}
 
-		private void _browser_JavascriptError(object sender, JavascriptErrorEventArgs error)
-		{
-			var msg = string.Format("There was a JScript error in {0} at line {1}: {2}",
-										error.Filename, error.Line, error.Message);
-
-			if(msg.Contains("$ is not defined"))
-			{
-				msg += Environment.NewLine + Environment.NewLine + "Make sure jquery is properly referenced";
-			}
-		
-			MessageBox.Show(msg, "Javascript Error", MessageBoxButtons.OK);
-		}
-
 		protected override void OnLoad(EventArgs e)
 		{
 			base.OnLoad(e);
@@ -128,6 +192,7 @@ namespace Tokay
 
 			LoadCurrentView();
 			_browser.ResetCursor();
+
 			_loaded = true;
 		}
 
