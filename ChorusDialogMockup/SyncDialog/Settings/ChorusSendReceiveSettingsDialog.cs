@@ -18,7 +18,7 @@ namespace ChorusDialogMockup.SyncDialog.Settings
         {
             InitializeComponent();
 
-			_tokay = new TokayControl(GetObject, FileLocator.GetFileDistributedWithApplication("ChorusSendReceiveSettings.html"));
+			_tokay = new TokayControl(FileLocator.DirectoryOfApplicationOrSolution, GetObject, FileLocator.GetFileDistributedWithApplication("ChorusSendReceiveSettings.html"));
 			Controls.Add(_tokay);
 			_tokay.Dock = DockStyle.Fill;
 			Model = new ChorusSendReceiveSettingsModel();

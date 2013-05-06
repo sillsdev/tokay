@@ -4,25 +4,29 @@
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="SyncView.css"/>
-	<link rel="stylesheet" type="text/css" href="../../lib/jquery-ui/css/base/jquery-ui.min.css"/>
-    <script type="text/javascript" src="../../lib/jquery-1.9.1.js"></script>
-	<script type="text/javascript" src="../../lib/jquery-ui/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="../../lib/knockout-2.2.1.debug.js"></script>
-	<script type="text/javascript" src="../../lib/knockout-jqueryui.min.js"></script>
-	<script type="text/javascript" src="../../js/tokay.js"></script>
     <script type='text/javascript'>
-		tokay.addComponentLibrary("Chorus", "..", true);
-        $(function () {
-            ko.applyBindings(tokay.loadViewModel('SyncViewModel'));
-        });
+        window.onload = function () {
+			require.config({
+				paths: {
+					"jquery": "lib/jquery-1.9.1",
+					"jquery-ui": "lib/jquery-ui/jquery-ui.min",
+					"jquery-ui-theme": "lib/jquery-ui/css/base/jquery-ui.min",
+					"knockout-jqueryui": "lib/knockout-jqueryui.min"
+				},
+				shim: {"jquery-ui": {deps: ["jquery"]}}
+			});
+			require(["knockout", "tokay", "css!jquery-ui-theme", "jquery-ui", "knockout-jqueryui"], function (ko, tokay) {
+				ko.applyBindings(tokay.loadViewModel('SyncViewModel'));
+			});
+        }
 	</script>
 </head>
 <body>
 	<div data-bind="if: State() === SyncState.Start">
-		<div data-bind="template: {name: 'SyncDialog.Start.SyncStartView', data: Start}"></div>
+		<div data-bind="template: {name: 'ChorusDialogMockup.SyncDialog.Start.SyncStartView', data: Start}"></div>
 	</div>
 	<div data-bind="if: State() === SyncState.Syncing">
-		<div data-bind="template: {name: 'SyncDialog.Status.SyncStatusView', data: Status}"></div>
+		<div data-bind="template: {name: 'ChorusDialogMockup.SyncDialog.Status.SyncStatusView', data: Status}"></div>
 	</div>
 </body>
 </html>

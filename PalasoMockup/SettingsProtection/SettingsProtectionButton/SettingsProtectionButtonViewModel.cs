@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 using Tokay;
 
-namespace ChorusDialogMockup.PalasoLibrary.SettingsProtection.SettingsProtectionButton
+namespace PalasoMockup.SettingsProtection.SettingsProtectionButton
 {
 	public class SettingsProtectionButtonViewModel : ObservableObject
 	{
@@ -14,7 +14,7 @@ namespace ChorusDialogMockup.PalasoLibrary.SettingsProtection.SettingsProtection
 
 		private void LaunchSettingsDialog()
 		{
-			var dlg = new  ChorusDialogMockup.PalasoLibrary.SettingsProtection.SettingsProtectionDialog.SettingsProtectionDialog();
+			var dlg = new  SettingsProtectionDialog.SettingsProtectionDialog();
 			dlg.Show();
 		}
 

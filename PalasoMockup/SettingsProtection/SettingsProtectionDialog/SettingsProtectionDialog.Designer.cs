@@ -1,4 +1,4 @@
-﻿namespace ChorusDialogMockup.PalasoLibrary.SettingsProtection.SettingsProtectionDialog
+﻿namespace PalasoMockup.SettingsProtection.SettingsProtectionDialog
 {
 	partial class SettingsProtectionDialog
 	{

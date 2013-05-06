@@ -8,12 +8,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChorusDialogMockup", "ChorusDialogMockup\ChorusDialogMockup.csproj", "{2891FD2C-2984-4435-A937-651E41A344B0}"
 	ProjectSection(ProjectDependencies) = postProject
+		{C4165B20-2519-4CF2-953E-FFF24D301149} = {C4165B20-2519-4CF2-953E-FFF24D301149}
 		{2D139A53-92B5-4C4D-B624-F7F7851926B9} = {2D139A53-92B5-4C4D-B624-F7F7851926B9}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokayLib", "TokayLib\TokayLib.csproj", "{2D139A53-92B5-4C4D-B624-F7F7851926B9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DictionaryEntryMockup", "DictionaryEntryMockup\DictionaryEntryMockup.csproj", "{89AB1310-5F63-401E-BF26-2507B435460C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PalasoMockup", "PalasoMockup\PalasoMockup.csproj", "{C4165B20-2519-4CF2-953E-FFF24D301149}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2D139A53-92B5-4C4D-B624-F7F7851926B9} = {2D139A53-92B5-4C4D-B624-F7F7851926B9}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +75,16 @@ Global
 		{89AB1310-5F63-401E-BF26-2507B435460C}.Release|Mixed Platforms.Build.0 = Release|x86
 		{89AB1310-5F63-401E-BF26-2507B435460C}.Release|x86.ActiveCfg = Release|x86
 		{89AB1310-5F63-401E-BF26-2507B435460C}.Release|x86.Build.0 = Release|x86
+		{C4165B20-2519-4CF2-953E-FFF24D301149}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4165B20-2519-4CF2-953E-FFF24D301149}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4165B20-2519-4CF2-953E-FFF24D301149}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C4165B20-2519-4CF2-953E-FFF24D301149}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C4165B20-2519-4CF2-953E-FFF24D301149}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C4165B20-2519-4CF2-953E-FFF24D301149}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4165B20-2519-4CF2-953E-FFF24D301149}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4165B20-2519-4CF2-953E-FFF24D301149}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C4165B20-2519-4CF2-953E-FFF24D301149}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C4165B20-2519-4CF2-953E-FFF24D301149}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

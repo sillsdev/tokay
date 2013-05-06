@@ -1,7 +1,5 @@
-(function ($, global, ko, undefined) {
+define(["require", "knockout"], function (require, ko) {
 	var objects = new Array();
-	var libraries = new Array();
-	var defaultLibrary = "";
 	
 	ko.bindingHandlers.command = {
 		init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
@@ -31,34 +29,22 @@
 	};
 	
 	var ComponentTemplateSource = function(templateId, options) {
-	    var self = this;
+	    var self = this, origAfterRender;
 	    self.templateId = templateId;
-	    self.template = loadTemplate(templateId, options);
+		self.loaded = false;
+	    self.template = ko.observable();
 	    self.data = {};
-		
-	    function loadTemplate(templateId, options) {
-			if (options.library === undefined)
-				options.library = defaultLibrary;
-			var path = libraries[options.library];
-			path = path + "/" + options.name.replace(new RegExp("[.]", "g"), "/");
-			var htmlPath = path + ".html";
-			var templateResult = "";
-
-			$.ajax({
-				url: htmlPath,
-				success: function(html) {
-					templateResult = html;
-				},
-				async: false,
-				dataType: "html"
-			});
-			$.getScript(path + ".js");
-			var link = document.createElement("link");
-			link.type = "text/css";
-			link.rel = "stylesheet";
-			link.href = path + ".css";
-			document.getElementsByTagName("head")[0].appendChild(link);
-			return templateResult;
+		self.options = options;
+		self.component = null;
+		if (self.options && self.options.afterRender) {
+			origAfterRender = self.options.afterRender;
+			self.options.afterRender = function() {
+				if (self.loaded) {
+					origAfterRender.apply(self.options, arguments);
+					if (component.initializeView !== undefined)
+						component.initializeView();
+				}
+			}
 		}
 	};
 	
@@ -70,11 +56,22 @@
 	        this.data[key] = value;
 	    },
 	    text: function(value) {
-	        if (arguments.length === 0) {
-	            return this.template;
-			}
-			this.template = arguments[0];
-	    }
+			if (!this.loaded)
+				this.getTemplate();
+		
+	        if (arguments.length === 0)
+	            return this.template();
+			this.template(arguments[0]);
+	    },
+	    getTemplate: function() {
+			var self = this;
+			var path = self.options.name.replace(new RegExp("[.]", "g"), "/");
+			require([path], function (component) {
+				self.component = component;
+				self.template(component.template);
+				self.loaded = true;
+			});
+		}
 	});
 	
 	var ComponentTemplateEngine = function() {
@@ -138,12 +135,6 @@
 	}
 	
 	var tokay = {
-		addComponentLibrary: function(name, path, def) {
-			libraries[name] = path;
-			if (def !== undefined && def)
-				defaultLibrary = name;
-		},
-	
 		_loadedID: -1,
 		loadViewModel: function(viewModelName) {
 			fireEvent('getObject', viewModelName);
@@ -258,5 +249,6 @@
 		}
 	};
 	
-	global.tokay = tokay;
-})(jQuery, window, ko);
+	window.tokay = tokay;
+	return tokay;
+});

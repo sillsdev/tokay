@@ -12,7 +12,7 @@ namespace ChorusDialogMockup.SyncDialog
         {
             InitializeComponent();
 
-			_tokay = new TokayControl(GetObject, FileLocator.GetFileDistributedWithApplication("SyncView.html"));
+			_tokay = new TokayControl(FileLocator.DirectoryOfApplicationOrSolution, GetObject, FileLocator.GetFileDistributedWithApplication("SyncView.html"));
 			Controls.Add(_tokay);
 			_tokay.Dock = DockStyle.Fill;
 			_syncViewModel = new SyncViewModel();

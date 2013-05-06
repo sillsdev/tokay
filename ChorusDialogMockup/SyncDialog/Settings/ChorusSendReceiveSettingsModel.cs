@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Windows.Forms;
 using System.Windows.Input;
-using ChorusDialogMockup.PalasoLibrary.SettingsProtection.SettingsProtectionButton;
+using PalasoMockup.SettingsProtection.SettingsProtectionButton;
 using Tokay;
 
 namespace ChorusDialogMockup.SyncDialog.Settings

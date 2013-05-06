@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using Tokay;
 
 namespace DictionaryEntryMockup
@@ -17,7 +10,7 @@ namespace DictionaryEntryMockup
 		public DictionaryEntryWindow()
 		{
 			InitializeComponent();
-			_tokay = new TokayControl(GetObject, FileLocator.GetFileDistributedWithApplication("DictionaryView.html"));
+			_tokay = new TokayControl(FileLocator.DirectoryOfApplicationOrSolution, GetObject, FileLocator.GetFileDistributedWithApplication("DictionaryView.html"));
 			Controls.Add(_tokay);
 			_tokay.Dock = DockStyle.Fill;
 			_model = new DictionaryModel();

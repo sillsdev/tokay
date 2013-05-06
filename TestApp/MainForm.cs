@@ -12,7 +12,7 @@ namespace TestApp
 		{
 			InitializeComponent();
 
-			_tokay = new TokayControl(GetObject, FileLocator.GetFileDistributedWithApplication("MainView.html"));
+			_tokay = new TokayControl(FileLocator.DirectoryOfApplicationOrSolution, GetObject, FileLocator.GetFileDistributedWithApplication("MainView.html"));
 			Controls.Add(_tokay);
 			_tokay.Dock = DockStyle.Fill;
 			_mainViewModel = new MainViewModel();

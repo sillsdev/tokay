@@ -12,6 +12,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Windows.Input;
 using Gecko;
+using Gecko.DOM;
 using Gecko.Interop;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -49,9 +50,12 @@ namespace Tokay
 		private string _currentViewHtmlPath;
 		private bool _loaded;
 		private readonly HashSet<Type> _enumerations;
+		private readonly string _basePath;
 
-		public TokayControl(Func<string, object> getObject, string pathToStartupViewHtml)
+		public TokayControl(string basePath, Func<string, object> getObject, string pathToStartupViewHtml)
 		{
+			_basePath = basePath;
+
 			GeckoFxInitializer.SetUpXulRunner();
 			GeckoPreferences.User["security.fileuri.strict_origin_policy"] = false;
 			GeckoPreferences.User["dom.max_script_run_time"] = 0;
@@ -100,7 +104,7 @@ namespace Tokay
 				msg += Environment.NewLine + Environment.NewLine + "Make sure jquery is properly referenced";
 			}
 		
-			MessageBox.Show(msg, "Javascript Error", MessageBoxButtons.OK);
+			MessageBox.Show(msg, "Javascript Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
 
 		private void _browser_ShowContextMenu(object sender, GeckoContextMenuEventArgs e)
@@ -131,20 +135,44 @@ namespace Tokay
 
 		private void Inspect_Click(object sender, EventArgs eventArgs)
 		{
-            string fireBugPath = Path.Combine(GeckoFxInitializer.DirectoryOfApplicationOrSolution, "lib", "firebug-lite");
-            var scriptUri = new Uri(Path.Combine(fireBugPath, "build", "firebug-lite.js"));
-            ExecuteScript(string.Format(@"
-					if (document.getElementById('FirebugLite')) {{
-						Firebug.chrome.toggle(true, true);
-					}} else {{ 
-						var E = document.createElement('script');
-						E.setAttribute('id', 'FirebugLite');
-						E.setAttribute('src', '{0}' + '#startInNewWindow=true, showIconWhenHidden=false');
-						E.setAttribute('FirebugLite', '4');
-						(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(E);
-					}}", scriptUri));
+			if (_browser.Document.GetElementById("FirebugLite") != null)
+			{
+			    ExecuteScript("Firebug.chrome.toggle(true, true)");
+			}
+			else
+			{
+			    var firebugScript = (GeckoScriptElement) _browser.Document.CreateHtmlElement("script");
+			    firebugScript.Id = "FirebugLite";
+			    firebugScript.SetAttribute("FirebugLite", "4");
+			    firebugScript.Type = "text/javascript";
+			    string fireBugPath = Path.Combine(GeckoFxInitializer.DirectoryOfApplicationOrSolution, "lib", "firebug-lite", "build", "firebug-lite.js");
+			    firebugScript.Src = new Uri(fireBugPath).ToString();
+				firebugScript.Text = "{startInNewWindow: true, showIconWhenHidden: false}";
+			    _browser.Document.Head.AppendChild(firebugScript);
+			}
 		}
 #endif
+
+		private void _browser_DOMContentLoaded(object sender, DomEventArgs e)
+		{
+			_browser.DOMContentLoaded -= _browser_DOMContentLoaded;
+			ExecuteScript(string.Format(@"
+				var require = {{
+					baseUrl: '{0}',
+					paths: {{knockout: '{1}', tokay: '{2}', css: '{3}', normalize: '{4}', text: '{5}'}}
+				}}", new Uri(_basePath), new Uri(Path.Combine(GeckoFxInitializer.DirectoryOfApplicationOrSolution, "lib", "knockout-2.2.1")),
+				new Uri(Path.Combine(GeckoFxInitializer.DirectoryOfApplicationOrSolution, "js", "tokay")),
+				new Uri(Path.Combine(GeckoFxInitializer.DirectoryOfApplicationOrSolution, "lib", "css")),
+				new Uri(Path.Combine(GeckoFxInitializer.DirectoryOfApplicationOrSolution, "lib", "normalize")),
+				new Uri(Path.Combine(GeckoFxInitializer.DirectoryOfApplicationOrSolution, "lib", "text"))));
+
+			var requireScript = (GeckoScriptElement) _browser.Document.CreateHtmlElement("script");
+			requireScript.Type = "text/javascript";
+			string requirePath = Path.Combine(GeckoFxInitializer.DirectoryOfApplicationOrSolution, "lib", "require.js");
+			requireScript.Src = new Uri(requirePath).ToString();
+			//requireScript.SetAttribute("onload", "initializeView()");
+			_browser.Document.Head.AppendChild(requireScript);
+		}
 
 		private void _browser_DomClick(object sender, DomEventArgs e)
 		{
@@ -216,8 +244,9 @@ namespace Tokay
 		private void LoadCurrentView()
 		{
 			//todo: string path = TokayPreprocessor.PreprocessFile(_currentViewHtmlPath);
-			var uri = new Uri(_currentViewHtmlPath);
+			_browser.DOMContentLoaded += _browser_DOMContentLoaded;
 			_browser.DocumentCompleted += _browser_DocumentCompleted;
+			var uri = new Uri(_currentViewHtmlPath);
 			_browser.Navigate(uri.AbsoluteUri);
 		}
 

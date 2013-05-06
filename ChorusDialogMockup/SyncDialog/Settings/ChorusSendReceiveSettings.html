@@ -3,19 +3,21 @@
 <head>
     <meta charset="utf-8" />
 	<link rel="stylesheet" type="text/css" href="ChorusSendReceiveSettings.css" />
-	<script type="text/javascript" src="../../../lib/jquery-1.9.1.js"></script>
-	<link rel="stylesheet" type="text/css" href="../../../lib/jquery-ui/css/base/jquery-ui.min.css"/>
-	<script type="text/javascript" src="../../../lib/jquery-ui/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="../../../lib/knockout-2.2.1.debug.js"></script>
-	<script type="text/javascript" src="../../../lib/knockout-jqueryui.min.js"></script>
-	<script type="text/javascript" src="../../../js/tokay.js"></script>
     <script type='text/javascript'>
-        
-        tokay.addComponentLibrary("PalasoLibrary", "../../PalasoLibrary", true);
-        $(function () {
-            ko.applyBindings(tokay.loadViewModel('ChorusSendReceiveSettingsModel'));
-        });
-        $("#tabs").tabs();
+        window.onload = function () {
+			require.config({
+				paths: {
+					"jquery": "lib/jquery-1.9.1",
+					"jquery-ui": "lib/jquery-ui/jquery-ui.min",
+					"jquery-ui-theme": "lib/jquery-ui/css/base/jquery-ui.min",
+					"knockout-jqueryui": "lib/knockout-jqueryui.min"
+				},
+				shim: {"jquery-ui": {deps: ["jquery"]}}
+			});
+			require(["knockout", "tokay", "css!jquery-ui-theme", "jquery-ui", "knockout-jqueryui"], function (ko, tokay) {
+				ko.applyBindings(tokay.loadViewModel('ChorusSendReceiveSettingsModel'));
+			});
+        }
     </script>
 	<title>SendReceiveSettings</title>
 </head>
@@ -34,7 +36,7 @@
 		</tbody>
 	</table>
 	<br>
-	<div id="tabs" data-bind="tabs: {}">
+	<div data-bind="tabs: {}">
 		<ul>
 			<li><a href="#fragment-1"><span>Internet</span></a></li>
 			<li><a href="#fragment-2"><span>Chorus Hub</span></a></li>
@@ -130,7 +132,7 @@
 		</div>
 	</div>
 	<div id="bottomButtonRow">
-	    <div data-bind="template: { library: 'PalasoLibrary', name: 'SettingsProtection.SettingsProtectionButton.SettingsProtectionButton', data: SettingsProtectionButtonViewModel }"></div>
+	    <div data-bind="template: { name: 'PalasoMockup.SettingsProtection.SettingsProtectionButton.SettingsProtectionButton', data: SettingsProtectionButtonViewModel }"></div>
 
 	    <div id="bottomRightButtonCluster">
 	        <button class="dialogButton" value="OK" type="button"style=" text-align: center" onclick="tokay.closeDialog('OK')">OK</button>

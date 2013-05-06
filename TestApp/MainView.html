@@ -2,28 +2,27 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<script type="text/javascript" src="../lib/jquery-1.9.1.js"></script>
-		<script type="text/javascript" src="../lib/knockout-2.2.1.debug.js"></script>
-		<script type="text/javascript" src="../js/tokay.js"></script>
 		<script type='text/javascript'>
-			$(function() {
-				ko.applyBindings(tokay.loadViewModel('Main'));
-			});
-			
-			function convertTypeToColor(type) {
-				var color;
-				switch (ko.utils.unwrapObservable(type)) {
-					case EnumTypes.Type1:
-						color = "red";
-						break;
-					case EnumTypes.Type2:
-						color = "blue";
-						break;
-					case EnumTypes.Type3:
-						color = "green";
-						break;
-				}
-				return color;
+			window.onload = function () {
+				require(["knockout", "tokay"], function (ko, tokay) {
+					window.convertTypeToColor = function(type) {
+						var color;
+						switch (ko.utils.unwrapObservable(type)) {
+							case EnumTypes.Type1:
+								color = "red";
+								break;
+							case EnumTypes.Type2:
+								color = "blue";
+								break;
+							case EnumTypes.Type3:
+								color = "green";
+								break;
+						}
+						return color;
+					}
+				
+					ko.applyBindings(tokay.loadViewModel('Main'));
+				});
 			}
 		</script>
 	</head>
