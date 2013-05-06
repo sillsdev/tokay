@@ -115,8 +115,11 @@
     <Content Include="SyncDialog\Start\chorusHubMedium.png" />
     <Content Include="SyncDialog\Start\internet29x32.png" />
     <Content Include="SyncDialog\Start\settings16x16.png" />
+    <Content Include="SyncDialog\Start\SyncStartView.css" />
     <Content Include="SyncDialog\Start\SyncStartView.html" />
+    <Content Include="SyncDialog\Start\SyncStartView.js" />
     <Content Include="SyncDialog\Status\SyncStatusView.html" />
+    <Content Include="SyncDialog\Status\SyncStatusView.js" />
     <Content Include="SyncDialog\SyncView.css" />
     <Content Include="SyncDialog\SyncView.html" />
     <Content Include="SyncDialog\Settings\ChorusSendReceiveSettings.html" />

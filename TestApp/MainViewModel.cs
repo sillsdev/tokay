@@ -22,8 +22,8 @@ namespace TestApp
 		public MainViewModel()
 		{
 			_items = new ObservableCollection<ItemViewModel> {new ItemViewModel("Test1", EnumTypes.Type1), new ItemViewModel("Test2", EnumTypes.Type2)};
-			_incrementCounterCommand = new RelayCommand(() => Counter++, () => Counter < 10);
-			_decrementCounterCommand = new RelayCommand(() => Counter--, () => Counter > 0);
+			_incrementCounterCommand = new RelayCommand<int>(n => Counter++, n => Counter < n);
+			_decrementCounterCommand = new RelayCommand<int>(n => Counter--, n => Counter > n);
 			_addItemCommand = new RelayCommand(() =>
 				{
 					_items.Add(new ItemViewModel(_newItemName, EnumTypes.Type3));

@@ -32,8 +32,8 @@
 		
 		<p>Counter: <span data-bind="text: Counter"></span></p>
 		<p>
-			<button data-bind="command: IncrementCounterCommand">Increment</button>
-			<button data-bind="command: DecrementCounterCommand">Decrement</button>
+			<button data-bind="command: IncrementCounterCommand, commandParameter: 10">Increment</button>
+			<button data-bind="command: DecrementCounterCommand, commandParameter: 0">Decrement</button>
 		</p>
 		<p>
 			<h4>Items</h4>
@@ -41,7 +41,7 @@
 				<li>
 					Item at position <span data-bind="text: $index"> </span>:
 					<span data-bind="text: Name, style: {color: convertTypeToColor(Type)}"> </span>
-					<a href="#" data-bind="command: $parent.RemoveItemCommand">Remove</a>
+					<a href="#" data-bind="command: $parent.RemoveItemCommand, commandParameter: $data">Remove</a>
 				</li>
 			</ul>
 			<input data-bind="value: NewItemName" />

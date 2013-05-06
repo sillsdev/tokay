@@ -215,7 +215,7 @@ namespace Tokay
 			_browser.AddMessageEventListener("updateObject", UpdateObject);
 			_browser.AddMessageEventListener("updateCollection", UpdateCollection);
 			_browser.AddMessageEventListener("executeCommand", ExecuteCommand);
-			_browser.AddMessageEventListener("setContext", SetContext);
+			_browser.AddMessageEventListener("addParameter", AddParameter);
 			_browser.AddMessageEventListener("closeDialog", CloseDialog);
 
 			LoadCurrentView();
@@ -339,11 +339,15 @@ namespace Tokay
 				var ctxtID = (string) jobj["ctxtID"];
 				object ctxt;
 				if (TryGetObject(ctxtID, out ctxt))
-					cmd.Execute(ctxt);
+				{
+					ObjectData ctxtData;
+					if (_objects.TryGetValue(ctxt, out ctxtData))
+						cmd.Execute(GetCommandContextParameter(ctxtData, cmd));
+				}
 			}
 		}
 
-		private void SetContext(string data)
+		private void AddParameter(string data)
 		{
 			if (_propertyMonitor.Busy)
 				return;
@@ -357,15 +361,15 @@ namespace Tokay
 				object ctxt;
 				if (TryGetObject(ctxtID, out ctxt))
 				{
-					ObjectData od;
-					if (_objects.TryGetValue(cmd, out od))
+					ObjectData cmdData;
+					if (_objects.TryGetValue(cmd, out cmdData))
 					{
-						if (od.Contexts == null)
-							od.Contexts = new List<WeakReference>();
+						if (cmdData.CommandContexts == null)
+							cmdData.CommandContexts = new List<WeakReference>();
 						bool found = false;
-						for (int i = od.Contexts.Count - 1; i >= 0; i--)
+						for (int i = cmdData.CommandContexts.Count - 1; i >= 0; i--)
 						{
-							object o = od.Contexts[i].Target;
+							object o = cmdData.CommandContexts[i].Target;
 							if (o != null)
 							{
 								if (o == ctxt)
@@ -376,12 +380,34 @@ namespace Tokay
 							}
 							else
 							{
-								od.Contexts.RemoveAt(i);
+								cmdData.CommandContexts.RemoveAt(i);
 							}
 						}
 						if (!found)
-							od.Contexts.Add(new WeakReference(ctxt));
-						UpdateCanExecute(cmdID, cmd, ctxtID, ctxt);
+							cmdData.CommandContexts.Add(new WeakReference(ctxt));
+
+						ObjectData ctxtData;
+						if (_objects.TryGetValue(ctxt, out ctxtData))
+						{
+							if (ctxtData.CommandContextParameters == null)
+								ctxtData.CommandContextParameters = new List<Tuple<WeakReference, object>>();
+							JToken paramData = jobj["param"];
+							if (paramData is JObject)
+							{
+								object param;
+								if (TryGetObject((string) paramData["id"], out param))
+								{
+									ctxtData.CommandContextParameters.Add(Tuple.Create(new WeakReference(cmd), (object) new WeakReference(param)));
+									UpdateCanExecute(cmdID, cmd, ctxtID, param);
+								}
+							}
+							else
+							{
+								var param = paramData == null ? null : paramData.ToObject<object>();
+								ctxtData.CommandContextParameters.Add(Tuple.Create(new WeakReference(cmd), param));
+								UpdateCanExecute(cmdID, cmd, ctxtID, param);
+							}
+						}
 					}
 				}
 			}
@@ -411,16 +437,29 @@ namespace Tokay
 				if (obj != null)
 				{
 					ObjectData od;
-					if (_objects.TryGetValue(obj, out od) && od.Contexts != null)
+					if (_objects.TryGetValue(obj, out od))
 					{
-						for (int i = od.Contexts.Count - 1; i >= 0; i--)
+						if (od.CommandContexts != null)
 						{
-							if (!od.Contexts[i].IsAlive)
-								od.Contexts.RemoveAt(i);
+							for (int i = od.CommandContexts.Count - 1; i >= 0; i--)
+							{
+								if (!od.CommandContexts[i].IsAlive)
+									od.CommandContexts.RemoveAt(i);
+							}
+							if (od.CommandContexts.Count == 0)
+								od.CommandContexts = null;
 						}
-						if (od.Contexts.Count == 0)
-							od.Contexts = null;
-
+						if (od.CommandContextParameters != null)
+						{
+							for (int i = od.CommandContextParameters.Count - 1; i >= 0; i--)
+							{
+								var weakRefParam = od.CommandContextParameters[i].Item2 as WeakReference;
+								if (!od.CommandContextParameters[i].Item1.IsAlive || (weakRefParam != null && !weakRefParam.IsAlive))
+									od.CommandContextParameters.RemoveAt(i);
+							}
+							if (od.CommandContextParameters.Count == 0)
+								od.CommandContextParameters = null;
+						}
 					}
 				}
 				else
@@ -581,27 +620,56 @@ namespace Tokay
 				return;
 
 			ObjectData od;
-			if (_objects.TryGetValue(sender, out od) && od.Contexts != null)
+			if (_objects.TryGetValue(sender, out od) && od.CommandContexts != null)
 			{
 				var cmd = (ICommand) sender;
-				for (int i = od.Contexts.Count - 1; i >= 0; i--)
+				for (int i = od.CommandContexts.Count - 1; i >= 0; i--)
 				{
-					var ctxt = od.Contexts[i].Target;
+					var ctxt = od.CommandContexts[i].Target;
 					if (ctxt != null)
 					{
 						ObjectData ctxtData;
 						if (_objects.TryGetValue(ctxt, out ctxtData))
-							UpdateCanExecute(od.ID, cmd, ctxtData.ID, ctxt);
+							UpdateCanExecute(od.ID, cmd, ctxtData.ID, GetCommandContextParameter(ctxtData, cmd));
 					}
 					else
 					{
-						od.Contexts.RemoveAt(i);
+						od.CommandContexts.RemoveAt(i);
 					}
 				}
 			}
 		}
 
-		private void UpdateCanExecute(string cmdID, ICommand cmd, string ctxtID, object ctxt)
+		private object GetCommandContextParameter(ObjectData ctxtData, ICommand cmd)
+		{
+			object param = null;
+			for (int j = ctxtData.CommandContextParameters.Count - 1; j >= 0; j--)
+			{
+				object o = ctxtData.CommandContextParameters[j].Item1.Target;
+				if (o != null)
+				{
+					if (o == cmd)
+					{
+						param = ctxtData.CommandContextParameters[j].Item2;
+						var weakRefParam = param as WeakReference;
+						if (weakRefParam != null)
+						{
+							param = weakRefParam.Target;
+							if (param == null)
+								ctxtData.CommandContextParameters.RemoveAt(j);
+						}
+						break;
+					}
+				}
+				else
+				{
+					ctxtData.CommandContextParameters.RemoveAt(j);
+				}
+			}
+			return param;
+		}
+
+		private void UpdateCanExecute(string cmdID, ICommand cmd, string ctxtID, object param)
 		{
 			using (_propertyMonitor.Enter())
 			{
@@ -610,7 +678,7 @@ namespace Tokay
 					new JProperty("props", new JArray(
 						new JObject(
 							new JProperty("name", string.Format("CanExecute{0}", cmdID)),
-							new JProperty("value", cmd.CanExecute(ctxt))))));
+							new JProperty("value", cmd.CanExecute(param))))));
 				ExecuteScript(string.Format("tokay._updateObject('{0}')", jobj.ToString(Formatting.None)));
 			}
 		}
@@ -660,7 +728,9 @@ namespace Tokay
 				get { return _id; }
 			}
 
-			public IList<WeakReference> Contexts { get; set; }
+			public IList<WeakReference> CommandContexts { get; set; }
+
+			public IList<Tuple<WeakReference, object>> CommandContextParameters { get; set; } 
 		}
 	}
 }

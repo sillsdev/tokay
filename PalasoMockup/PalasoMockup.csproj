@@ -58,6 +58,7 @@
     <Content Include="SettingsProtection\SettingsProtectionButton\lockOpen48x48.png" />
     <Content Include="SettingsProtection\SettingsProtectionButton\SettingsProtectionButton.css" />
     <Content Include="SettingsProtection\SettingsProtectionButton\SettingsProtectionButton.html" />
+    <Content Include="SettingsProtection\SettingsProtectionButton\SettingsProtectionButton.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SettingsProtection\SettingsProtectionDialog\SettingsProtectionDialog.resx">

@@ -5,8 +5,18 @@ define(["require", "knockout"], function (require, ko) {
 		init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
 			var cmd = ko.utils.unwrapObservable(valueAccessor());
 			viewModel['CanExecute' + cmd._id] = ko.observable(true);
-			var data = {cmdID: cmd._id, ctxtID: viewModel._id};
-			fireEvent('setContext', JSON.stringify(data));
+			var parameter = allBindingsAccessor()["commandParameter"];
+			if (ko.isObservable(parameter)) {
+				parameter.subscribe(function(newValue) {
+					var data = {cmdID: cmd._id, ctxtID: viewModel._id, param: newValue};
+					fireEvent('addParameter', JSON.stringify(data));
+				});
+			}
+			var paramData = ko.utils.unwrapObservable(parameter);
+			if (typeof paramData === "object")
+				paramData = {id: paramData._id};
+			var data = {cmdID: cmd._id, ctxtID: viewModel._id, param: paramData};
+			fireEvent('addParameter', JSON.stringify(data));
 			CheckEnabled(ko.utils.unwrapObservable(viewModel['CanExecute' + cmd._id]), element);
 			viewModel['CanExecute' + cmd._id].subscribe(function(newValue) {
 				CheckEnabled(newValue, element);
@@ -164,7 +174,7 @@ define(["require", "knockout"], function (require, ko) {
 						data.items = new Array();
 						for (var i = 0; i < newValue.length; i++) {
 							if (typeof newValue[i] === 'object')
-								data.items.push(objects[newValue[i].id]);
+								data.items.push({id: newValue[i]._id});
 							else
 								data.items.push(newValue[i]);
 						}
