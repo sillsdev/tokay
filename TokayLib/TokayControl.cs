@@ -161,7 +161,7 @@ namespace Tokay
 					baseUrl: '{0}',
 					paths: {{knockout: '{1}', tokay: '{2}', css: '{3}', normalize: '{4}', text: '{5}'}}
 				}}", new Uri(_basePath), new Uri(Path.Combine(GeckoFxInitializer.DirectoryOfApplicationOrSolution, "lib", "knockout-2.2.1")),
-				new Uri(Path.Combine(GeckoFxInitializer.DirectoryOfApplicationOrSolution, "js", "tokay")),
+				new Uri(Path.Combine(GeckoFxInitializer.DirectoryOfApplicationOrSolution, "TokayLib", "tokay")),
 				new Uri(Path.Combine(GeckoFxInitializer.DirectoryOfApplicationOrSolution, "lib", "css")),
 				new Uri(Path.Combine(GeckoFxInitializer.DirectoryOfApplicationOrSolution, "lib", "normalize")),
 				new Uri(Path.Combine(GeckoFxInitializer.DirectoryOfApplicationOrSolution, "lib", "text"))));
@@ -243,7 +243,6 @@ namespace Tokay
 
 		private void LoadCurrentView()
 		{
-			//todo: string path = TokayPreprocessor.PreprocessFile(_currentViewHtmlPath);
 			_browser.DOMContentLoaded += _browser_DOMContentLoaded;
 			_browser.DocumentCompleted += _browser_DocumentCompleted;
 			var uri = new Uri(_currentViewHtmlPath);
