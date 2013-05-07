@@ -10,8 +10,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokayLib", "TokayLib\TokayL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChorusDialogMockup", "ChorusDialogMockup\ChorusDialogMockup.csproj", "{2891FD2C-2984-4435-A937-651E41A344B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokaySharpTests", "TokaySharpTests\TokaySharpTests.csproj", "{95E7EB26-26FF-4116-BE0A-3EABEB56F186}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
